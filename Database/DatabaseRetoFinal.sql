@@ -17,10 +17,10 @@ category_description VARCHAR(255)
 -- Table task creation
 CREATE TABLE task(
 id INT AUTO_INCREMENT PRIMARY KEY,
-name VARCHAR(255) NOT NULL,
-description VARCHAR(255),
+task_name VARCHAR(255) NOT NULL,
+task_description VARCHAR(255),
 due_date DATE,
-state ENUM('pending', 'completed') DEFAULT 'pending',
+task_state ENUM('pending', 'completed') DEFAULT 'pending',
 username VARCHAR(255),
 category_id INT,
 FOREIGN KEY (username) REFERENCES client(username) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -33,4 +33,4 @@ INSERT INTO client VALUES ("ekaitz123", "Ekaitz", "1234", 23), ("alicia123", "Al
 INSERT INTO category VALUES ("Personal", "Personal tasks"), ("Work", "Work tasks"), ("Health", "Health tasks"), ("Shopping", "Shopping tasks");
 
 -- Table task inserts
-INSERT INTO task VALUES ("Buy groceries", "Buy groceries for the week", "2025-04-30", "pending", "ekaitz123", 4), ("Go gym", "Pay the month for the gym and go", "2025-04-30", "pending", "alicia123", 1);
+INSERT INTO task (task_name, task_description, due_date, task_state, username, category_id) VALUES ("Buy groceries", "Buy groceries for the week", "2025-04-30", "pending", "ekaitz123", 4), ("Go gym", "Pay the month for the gym and go", "2025-04-30", "pending", "alicia123", 1);
