@@ -8,6 +8,12 @@ client_name VARCHAR(255),
 client_password VARCHAR(255) NOT NULL,
 age INT
 );
+-- Table category creation
+CREATE TABLE category(
+id INT AUTO_INCREMENT PRIMARY KEY,
+category_name VARCHAR(255) UNIQUE,
+category_description VARCHAR(255)
+);
 -- Table task creation
 CREATE TABLE task(
 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -16,28 +22,15 @@ description VARCHAR(255),
 due_date DATE,
 state ENUM('pending', 'completed') DEFAULT 'pending',
 username VARCHAR(255),
-FOREIGN KEY (username) REFERENCES client(username) ON UPDATE CASCADE ON DELETE CASCADE
+category_id INT,
+FOREIGN KEY (username) REFERENCES client(username) ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (category_id) REFERENCES category(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
--- Table category creation
-CREATE TABLE category(
-id INT AUTO_INCREMENT PRIMARY KEY,
-category_name VARCHAR(255) UNIQUE,
-category_description VARCHAR(255)
-);
--- Table tag creation
-CREATE TABLE tag (
-id INT AUTO_INCREMENT PRIMARY KEY,
-tag_name VARCHAR(255) UNIQUE
-);
--- Table task_tag creation
-CREATE TABLE task_tag(
-task_id INT,
-tag_id INT,
-PRIMARY KEY (task_id, tag_id),
-FOREIGN KEY (task_id) REFERENCES task(id) ON UPDATE CASCADE ON DELETE CASCADE,
-FOREIGN KEY (tag_id) REFERENCES tag(id) ON UPDATE CASCADE ON DELETE CASCADE
-);
+-- Table client inserts
+INSERT INTO client VALUES ("ekaitz123", "Ekaitz", "1234", 23), ("alicia123", "Alicia", "1234", 23), ("mosi123", "Mosi", "1234", 23), ("kevin123", "Kevin", "1234", 23);
 
+-- Table category inserts
+INSERT INTO category VALUES ("Personal", "Personal tasks"), ("Work", "Work tasks"), ("Health", "Health tasks"), ("Shopping", "Shopping tasks");
 
-
-
+-- Table task inserts
+INSERT INTO task VALUES ("Buy groceries", "Buy groceries for the week", "2025-04-30", "pending", "ekaitz123", 4), ("Go gym", "Pay the month for the gym and go", "2025-04-30", "pending", "alicia123", 1);
