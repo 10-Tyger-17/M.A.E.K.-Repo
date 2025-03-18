@@ -54,7 +54,7 @@ public class ImplementDB implements ModelDAO {
 
 	@Override
 	public Client login(String username, String password) {
-		Cliente client = null;
+		Client client = null;
 		
 		this.openConnection();
 		
