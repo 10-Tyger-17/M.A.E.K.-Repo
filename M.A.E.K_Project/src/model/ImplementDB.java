@@ -22,7 +22,8 @@ public class ImplementDB implements ModelDAO {
 
 	final String SQLLOGIN = "SELECT * FROM client WHERE username = ? && client_password = ?;";
 	final String SQLTASKS = "SELECT * FROM task WHERE username = ?;";
-
+	final String SQLSIGNUP = "CALL SIGNUP(?,?,?,?);";
+	
 	public ImplementDB() {
 		this.configFile = ResourceBundle.getBundle("configClase");
 		this.driverBD = this.configFile.getString("Driver");
@@ -78,6 +79,31 @@ public class ImplementDB implements ModelDAO {
 		
 		return client;
 	}
+	
+	@Override
+	public Client signUp(String username, String client_name, String client_password, int age) {
+		Client client = null;
+		this.openConnection();
+		
+		try {
+			stmt = con.prepareStatement(SQLSIGNUP);
+			stmt.setString(1, username);
+			stmt.setString(2, client_name);
+			stmt.setString(3, client_password);
+			stmt.setInt(4,age);
+			result = stmt.executeQuery();
+
+			if (result.findColumn("Mensaje")==1) {
+				client = new Client(result.getString(1), result.getString(2), result.getString(3), result.getInt(4));
+			}
+		} catch (SQLException e) {
+			System.out.println("Error signUp: " + e.getMessage());
+		} finally {
+			this.closeConnection();
+		}
+		
+		return client;
+	}
 
 	@Override
 	public ArrayList<Task> getTasks(Client client) {
@@ -103,4 +129,6 @@ public class ImplementDB implements ModelDAO {
 		
 		return tasks;
 	}
+
+	
 }
