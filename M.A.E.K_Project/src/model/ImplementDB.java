@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 public class ImplementDB implements ModelDAO {
@@ -19,6 +21,7 @@ public class ImplementDB implements ModelDAO {
 	private String passwordBD;
 
 	final String SQLLOGIN = "SELECT * FROM client WHERE username = ? && client_password = ?;";
+	final String SQLTASKS = "SELECT * FROM task WHERE username = ?;";
 
 	public ImplementDB() {
 		this.configFile = ResourceBundle.getBundle("configClase");
@@ -74,5 +77,30 @@ public class ImplementDB implements ModelDAO {
 		}
 		
 		return client;
+	}
+
+	@Override
+	public ArrayList<Task> getTasks(Client client) {
+		ArrayList<Task> tasks = new ArrayList<>();
+		
+		this.openConnection();
+		
+		try {
+			stmt = con.prepareStatement(SQLTASKS);
+			stmt.setString(1, client.getUsername());
+			result = stmt.executeQuery();
+
+			while (result.next()) {
+				tasks.add(new Task(result.getInt(1), result.getString(2), result.getString(3), result.getDate(4).toLocalDate(), Task_state_Enum.valueOf(result.getString(5)), result.getString(6), result.getInt(7)));
+			}
+			
+			tasks.sort(Comparator.comparing(Task::getDue_date));
+		} catch (SQLException e) {
+			System.out.println("Error login: " + e.getMessage());
+		} finally {
+			this.closeConnection();
+		}
+		
+		return tasks;
 	}
 }
