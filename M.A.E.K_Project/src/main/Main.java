@@ -1,12 +1,13 @@
 package main;
 
 import visual.WindowLogin;
+import controller.Controller;
 
 public class Main {
 
 	public static void main(String[] args) {
-		WindowLogin frame = new WindowLogin();
-		frame.setVisible(true);
+		Controller frameLogin = new Controller();
+		frameLogin.showScreen();
 	}
 
 }

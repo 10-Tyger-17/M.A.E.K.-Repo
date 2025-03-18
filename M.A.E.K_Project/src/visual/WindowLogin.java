@@ -12,16 +12,28 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.Window.Type;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.border.LineBorder;
+
+import controller.Controller;
+
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class WindowLogin extends JFrame {
+public class WindowLogin extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPasswordField passwordField;
 	private JTextField textField;
+	private JButton btnSignUp;
+	private JButton btnLogIn;
+	private JLabel lblWelcome;
+	private Controller cont;
+	private JLabel lblUsername;
+	private JLabel lblPassword;
 	
 	public WindowLogin() {
 		setBackground(new Color(173, 181, 189));
@@ -36,7 +48,7 @@ public class WindowLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnSignUp = new JButton("Become a member");
+		btnSignUp = new JButton("Become a member");
 		btnSignUp.setForeground(new Color(33, 37, 41));
 		btnSignUp.setBorder(new LineBorder(new Color(33, 37, 41), 5));
 		btnSignUp.setFont(new Font("Source Code Pro", Font.PLAIN, 36));
@@ -44,7 +56,7 @@ public class WindowLogin extends JFrame {
 		btnSignUp.setBounds(46, 400, 659, 45);
 		contentPane.add(btnSignUp);
 		
-		JButton btnLogIn = new JButton("Sign In");
+		btnLogIn = new JButton("Sign In");
 		btnLogIn.setForeground(new Color(222, 226, 230));
 		btnLogIn.setFont(new Font("Source Code Pro", Font.PLAIN, 36));
 		btnLogIn.setBorder(null);
@@ -57,12 +69,12 @@ public class WindowLogin extends JFrame {
 		passwordField.setBounds(46, 240, 659, 40);
 		contentPane.add(passwordField);
 		
-		JLabel lblPassword = new JLabel("Password");
+		lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblPassword.setBounds(46, 206, 131, 34);
 		contentPane.add(lblPassword);
 		
-		JLabel lblUsername = new JLabel("Username");
+		lblUsername = new JLabel("Username");
 		lblUsername.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblUsername.setBounds(47, 120, 131, 34);
 		contentPane.add(lblUsername);
@@ -73,11 +85,23 @@ public class WindowLogin extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblWelcome = new JLabel("Welcome");
+		lblWelcome = new JLabel("Welcome");
 		lblWelcome.setForeground(new Color(33, 37, 41));
 		lblWelcome.setFont(new Font("Source Code Pro", Font.PLAIN, 72));
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcome.setBounds(46, 11, 658, 84);
 		contentPane.add(lblWelcome);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()== btnLogIn) {
+			if(cont.login(lblUsername.getText(), new String(lblPassword.getText()))==null) {
+				
+			}else {
+				
+			}
+		}
+			
 	}
 }
