@@ -8,4 +8,5 @@ public interface ModelDAO {
 	public ArrayList<Task> getTasks(Client client);
 	public boolean setTask(Task task);
 	public boolean removeTask(Task task);
+	public boolean modifyTask(Task task);
 }
