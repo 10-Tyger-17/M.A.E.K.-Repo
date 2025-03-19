@@ -13,7 +13,7 @@ public class Controller {
 	ModelDAO dao = new ImplementDB();
 	
 	public void showScreen() {
-		WindowLogin frameLogin = new WindowLogin();
+		WindowLogin frameLogin = new WindowLogin(this);
 		frameLogin.setVisible(true);
 	}
 	public Client login(String username, String password) {

@@ -25,7 +25,7 @@ public class ImplementDB implements ModelDAO {
 	final String SQLSIGNUP = "CALL SIGNUP(?,?,?,?);";
 	
 	public ImplementDB() {
-		this.configFile = ResourceBundle.getBundle("configClase");
+		this.configFile = ResourceBundle.getBundle("configs.configClase");
 		this.driverBD = this.configFile.getString("Driver");
 		this.urlBD = this.configFile.getString("Conn");
 		this.userBD = this.configFile.getString("DBUser");

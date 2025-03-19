@@ -1,7 +1,5 @@
 package visual;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
-import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -35,7 +32,8 @@ public class WindowLogin extends JFrame implements ActionListener{
 	private JLabel lblUsername;
 	private JLabel lblPassword;
 	
-	public WindowLogin() {
+	public WindowLogin(Controller cont) {
+		this.cont = cont;
 		setBackground(new Color(173, 181, 189));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowLogin.class.getResource("/visual/Assets/Logo.jpg")));
 		setResizable(false);
@@ -62,6 +60,7 @@ public class WindowLogin extends JFrame implements ActionListener{
 		btnLogIn.setBorder(null);
 		btnLogIn.setBackground(new Color(33, 37, 41));
 		btnLogIn.setBounds(46, 327, 659, 45);
+		btnLogIn.addActionListener(this);
 		contentPane.add(btnLogIn);
 		
 		passwordField = new JPasswordField();
@@ -97,9 +96,9 @@ public class WindowLogin extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== btnLogIn) {
 			if(cont.login(lblUsername.getText(), new String(lblPassword.getText()))==null) {
-				
+				System.out.println("No funciona");
 			}else {
-				
+				System.out.println("Funciona");
 			}
 		}
 			

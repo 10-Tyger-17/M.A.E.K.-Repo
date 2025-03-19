@@ -1,6 +1,5 @@
 package main;
 
-import visual.WindowLogin;
 import controller.Controller;
 
 public class Main {
