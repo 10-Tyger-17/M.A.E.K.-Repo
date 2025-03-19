@@ -64,6 +64,7 @@ public class WindowLogin extends JFrame implements ActionListener{
 		contentPane.add(btnLogIn);
 		
 		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		passwordField.setBackground(new Color(173, 181, 189));
 		passwordField.setBounds(46, 240, 659, 40);
 		contentPane.add(passwordField);
@@ -79,6 +80,7 @@ public class WindowLogin extends JFrame implements ActionListener{
 		contentPane.add(lblUsername);
 		
 		textField = new JTextField();
+		textField.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		textField.setBackground(new Color(173, 181, 189));
 		textField.setBounds(46, 150, 659, 40);
 		contentPane.add(textField);
