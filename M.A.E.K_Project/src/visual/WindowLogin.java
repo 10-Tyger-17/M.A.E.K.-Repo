@@ -104,7 +104,7 @@ public class WindowLogin extends JFrame implements ActionListener{
 				textField.setBackground(new Color(255,120,120));
 				passwordField.setBackground(new Color(255,120,120));
 			}else {
-				WindowMenu ventana=new WindowMenu(cont);
+				WindowMenu ventana=new WindowMenu(this, cont);
 				ventana.setVisible(true);
 				this.dispose();
 			}
