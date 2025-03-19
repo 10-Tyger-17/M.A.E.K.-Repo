@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,8 +22,12 @@ public class ImplementDB implements ModelDAO {
 	private String passwordBD;
 
 	final String SQLLOGIN = "SELECT * FROM client WHERE username = ? && client_password = ?;";
-	final String SQLTASKS = "SELECT * FROM task WHERE username = ?;";
 	final String SQLSIGNUP = "CALL SIGNUP(?,?,?,?);";
+	final String SQLTASKS = "SELECT * FROM task WHERE username = ?;";
+	final String SQLSETTASK = "INSERT INTO task (task_name, task_description, due_date, task_state, username, category_id) VALUES (?, ?, ?, ?, ?, ?);";
+	final String SQLREMOVETASK = "DELETE FROM task WHERE id = ?;";
+	final String SQLMODIFYTASK = "UPDATE task SET task_description = ? WHERE id = ?;";
+	final String SQLSTATETASK = "UPDATE task SET task_state = ? WHERE id = ?;";
 	
 	public ImplementDB() {
 		this.configFile = ResourceBundle.getBundle("configs.configClase");
@@ -92,9 +97,10 @@ public class ImplementDB implements ModelDAO {
 			stmt.setString(3, client_password);
 			stmt.setInt(4, age);
 			result = stmt.executeQuery();
+			result.next();
 
-			if (result.findColumn("Mensaje") == 1) {
-				client = new Client(result.getString(1), result.getString(2), result.getString(3), result.getInt(4));
+			if (result.getString("Mensaje").contains("Añadido pedido con referencia")) {
+			    client = new Client(result.getString(1), result.getString(2), result.getString(3), result.getInt(4));
 			}
 		} catch (SQLException e) {
 			System.out.println("Error signUp: " + e.getMessage());
@@ -122,11 +128,114 @@ public class ImplementDB implements ModelDAO {
 			
 			tasks.sort(Comparator.comparing(Task::getDue_date));
 		} catch (SQLException e) {
-			System.out.println("Error login: " + e.getMessage());
+			System.out.println("Error getTasks: " + e.getMessage());
 		} finally {
 			this.closeConnection();
 		}
 		
 		return tasks;
+	}
+	
+	@Override
+	public boolean setTask(Task task) {
+		boolean error = false;
+		
+		this.openConnection();
+		
+		try {
+			stmt = con.prepareStatement(SQLSETTASK);
+			stmt.setString(1, task.getTask_name());
+			stmt.setString(2, task.getTask_description());
+			stmt.setDate(3, Date.valueOf(task.getDue_date()));
+			stmt.setString(4, task.getTask_state().value());
+			stmt.setString(5, task.getUsername());
+			stmt.setInt(6, task.getCategory_id());
+			
+			if (stmt.executeUpdate() == 0) {
+				error = true;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Error setTask: " + e.getMessage());
+			error = true;
+		} finally {
+			this.closeConnection();
+		}
+		
+		return error;
+	}
+
+	@Override
+	public boolean removeTask(Task task) {
+		boolean error = false;
+		
+		this.openConnection();
+		
+		try {
+			stmt = con.prepareStatement(SQLREMOVETASK);
+			stmt.setInt(1, task.getId());
+			
+			if (stmt.executeUpdate() == 0) {
+				error = true;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Error removeTask: " + e.getMessage());
+			error = true;
+		} finally {
+			this.closeConnection();
+		}
+		
+		return error;
+	}
+	
+	@Override
+	public boolean modifyTask(Task task) {
+		boolean error = false;
+		
+		this.openConnection();
+		
+		try {
+			stmt = con.prepareStatement(SQLMODIFYTASK);
+			stmt.setString(1, task.getTask_description());
+			stmt.setInt(2, task.getId());
+			
+			if (stmt.executeUpdate() == 0) {
+				error = true;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Error modifyTask: " + e.getMessage());
+			error = true;
+		} finally {
+			this.closeConnection();
+		}
+		
+		return error;
+	}
+	
+	@Override
+	public boolean stateTask(Task task) {
+		boolean error = false;
+		
+		this.openConnection();
+		
+		try {
+			stmt = con.prepareStatement(SQLSTATETASK);
+			stmt.setString(1, task.getTask_state().value());
+			stmt.setInt(2, task.getId());
+			
+			if (stmt.executeUpdate() == 0) {
+				error = true;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Error stateTask: " + e.getMessage());
+			error = true;
+		} finally {
+			this.closeConnection();
+		}
+		
+		return error;
 	}
 }

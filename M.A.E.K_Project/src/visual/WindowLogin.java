@@ -101,9 +101,12 @@ public class WindowLogin extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== btnLogIn) {
 			if(cont.login(textField.getText(), new String(passwordField.getPassword()))==null) {
-				System.out.println("No funciona");
+				textField.setBackground(new Color(255,120,120));
+				passwordField.setBackground(new Color(255,120,120));
 			}else {
-				System.out.println("Funciona");
+				WindowMenu ventana=new WindowMenu(cont);
+				ventana.setVisible(true);
+				this.dispose();
 			}
 			
 		}

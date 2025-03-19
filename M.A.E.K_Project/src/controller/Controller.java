@@ -25,5 +25,16 @@ public class Controller {
 	public ArrayList<Task> getTasks(Client client){
 		return dao.getTasks(client);
 	}
-
+	public boolean setTask(Task task){
+		return dao.setTask(task);
+	}
+	public boolean removeTask(Task task){
+		return dao.removeTask(task);
+	}
+	public boolean modifyTask(Task task){
+		return dao.modifyTask(task);
+	}
+	public boolean stateTask(Task task){
+		return dao.stateTask(task);
+	}
 }
