@@ -99,7 +99,7 @@ public class WindowLogin extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== btnLogIn) {
-			if(cont.login(lblUsername.getText(), new String(lblPassword.getText()))==null) {
+			if(cont.login(textField.getText(), new String(passwordField.getPassword()))==null) {
 				System.out.println("No funciona");
 			}else {
 				System.out.println("Funciona");

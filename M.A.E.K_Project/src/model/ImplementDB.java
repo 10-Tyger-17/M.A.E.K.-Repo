@@ -67,7 +67,7 @@ public class ImplementDB implements ModelDAO {
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			result = stmt.executeQuery();
-
+			
 			if (result.next()) {
 				client = new Client(result.getString(1), result.getString(2), result.getString(3), result.getInt(4));
 			}
@@ -90,10 +90,10 @@ public class ImplementDB implements ModelDAO {
 			stmt.setString(1, username);
 			stmt.setString(2, client_name);
 			stmt.setString(3, client_password);
-			stmt.setInt(4,age);
+			stmt.setInt(4, age);
 			result = stmt.executeQuery();
 
-			if (result.findColumn("Mensaje")==1) {
+			if (result.findColumn("Mensaje") == 1) {
 				client = new Client(result.getString(1), result.getString(2), result.getString(3), result.getInt(4));
 			}
 		} catch (SQLException e) {
@@ -129,6 +129,4 @@ public class ImplementDB implements ModelDAO {
 		
 		return tasks;
 	}
-
-	
 }
