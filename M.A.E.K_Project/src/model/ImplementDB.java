@@ -27,6 +27,7 @@ public class ImplementDB implements ModelDAO {
 	final String SQLSETTASK = "INSERT INTO task (task_name, task_description, due_date, task_state, username, category_id) VALUES (?, ?, ?, ?, ?, ?);";
 	final String SQLREMOVETASK = "DELETE FROM task WHERE id = ?;";
 	final String SQLMODIFYTASK = "UPDATE task SET task_description = ? WHERE id = ?;";
+	final String SQLSTATETASK = "UPDATE task SET task_state = ? WHERE id = ?;";
 	
 	public ImplementDB() {
 		this.configFile = ResourceBundle.getBundle("configs.configClase");
@@ -197,7 +198,7 @@ public class ImplementDB implements ModelDAO {
 		try {
 			stmt = con.prepareStatement(SQLMODIFYTASK);
 			stmt.setString(1, task.getTask_description());
-			stmt.setInt(1, task.getId());
+			stmt.setInt(2, task.getId());
 			
 			if (stmt.executeUpdate() == 0) {
 				error = true;
@@ -205,6 +206,31 @@ public class ImplementDB implements ModelDAO {
 			
 		} catch (SQLException e) {
 			System.out.println("Error modifyTask: " + e.getMessage());
+			error = true;
+		} finally {
+			this.closeConnection();
+		}
+		
+		return error;
+	}
+	
+	@Override
+	public boolean stateTask(Task task) {
+		boolean error = false;
+		
+		this.openConnection();
+		
+		try {
+			stmt = con.prepareStatement(SQLSTATETASK);
+			stmt.setString(1, task.getTask_state().value());
+			stmt.setInt(2, task.getId());
+			
+			if (stmt.executeUpdate() == 0) {
+				error = true;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Error stateTask: " + e.getMessage());
 			error = true;
 		} finally {
 			this.closeConnection();
