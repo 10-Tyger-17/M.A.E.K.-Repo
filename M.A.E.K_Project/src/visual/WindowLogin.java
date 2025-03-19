@@ -52,6 +52,7 @@ public class WindowLogin extends JFrame implements ActionListener{
 		btnSignUp.setFont(new Font("Source Code Pro", Font.PLAIN, 36));
 		btnSignUp.setBackground(new Color(222, 226, 230));
 		btnSignUp.setBounds(46, 400, 659, 45);
+		btnSignUp.addActionListener(this);
 		contentPane.add(btnSignUp);
 		
 		btnLogIn = new JButton("Sign In");
@@ -104,6 +105,11 @@ public class WindowLogin extends JFrame implements ActionListener{
 			}else {
 				System.out.println("Funciona");
 			}
+			
+		}
+		if(e.getSource()==btnSignUp) {
+			WindowSignUp WindowSignUp = new WindowSignUp(this,cont);
+			WindowSignUp.setVisible(true);
 		}
 			
 	}

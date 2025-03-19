@@ -5,39 +5,43 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.Controller;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 
-public class WindowSignUp extends JDialog {
+public class WindowSignUp extends JDialog implements ActionListener{
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldName;
 	private JTextField textFieldAge;
 	private JTextField textFieldUsername;
 	private JTextField textFieldPassword;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			WindowSignUp dialog = new WindowSignUp();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private JLabel lblSignUp;
+	private JLabel lblName;
+	private JLabel lblAge;
+	private JLabel lblUsername;
+	private JLabel lblPassword;
+	private JButton btnSignUp;
+	private Controller cont;
+	
+	
 
 	/**
 	 * Create the dialog.
 	 */
-	public WindowSignUp() {
+	public WindowSignUp(JFrame parent,Controller cont) {
+		super(parent,true);
+		this.cont= cont;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowSignUp.class.getResource("/visual/Assets/Logo.jpg")));
 		setBounds(100, 100, 464, 532);
 		getContentPane().setLayout(new BorderLayout());
@@ -45,7 +49,7 @@ public class WindowSignUp extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JLabel lblSignUp = new JLabel("Sign Up");
+		lblSignUp = new JLabel("Sign Up");
 		lblSignUp.setForeground(new Color(33, 37, 41));
 		lblSignUp.setFont(new Font("Source Code Pro", Font.PLAIN, 72));
 		lblSignUp.setBounds(60, 11, 326, 91);
@@ -57,13 +61,13 @@ public class WindowSignUp extends JDialog {
 		contentPanel.add(textFieldName);
 		textFieldName.setColumns(10);
 		
-		JLabel lblName = new JLabel("Name");
+		lblName = new JLabel("Name");
 		lblName.setForeground(new Color(33, 37, 41));
 		lblName.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblName.setBounds(33, 93, 74, 34);
 		contentPanel.add(lblName);
 		
-		JLabel lblAge = new JLabel("Age");
+		lblAge = new JLabel("Age");
 		lblAge.setForeground(new Color(33, 37, 41));
 		lblAge.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblAge.setBounds(34, 172, 74, 34);
@@ -75,7 +79,7 @@ public class WindowSignUp extends JDialog {
 		contentPanel.add(textFieldAge);
 		textFieldAge.setColumns(10);
 		
-		JLabel lblUsername = new JLabel("Username");
+		lblUsername = new JLabel("Username");
 		lblUsername.setForeground(new Color(33, 37, 41));
 		lblUsername.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblUsername.setBounds(33, 251, 121, 34);
@@ -87,7 +91,7 @@ public class WindowSignUp extends JDialog {
 		contentPanel.add(textFieldUsername);
 		textFieldUsername.setColumns(10);
 		
-		JLabel lblPassword = new JLabel("Password");
+		lblPassword = new JLabel("Password");
 		lblPassword.setForeground(new Color(33, 37, 41));
 		lblPassword.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblPassword.setBounds(32, 330, 122, 34);
@@ -99,11 +103,22 @@ public class WindowSignUp extends JDialog {
 		contentPanel.add(textFieldPassword);
 		textFieldPassword.setColumns(10);
 		
-		JButton btnSignUp = new JButton("Sign Up");
+		btnSignUp = new JButton("Sign Up");
 		btnSignUp.setForeground(new Color(255, 255, 255));
 		btnSignUp.setBackground(new Color(33, 37, 41));
 		btnSignUp.setFont(new Font("Source Code Pro", Font.PLAIN, 36));
 		btnSignUp.setBounds(32, 425, 391, 45);
+		btnSignUp.addActionListener(this);
 		contentPanel.add(btnSignUp);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()== btnSignUp) {
+			if(cont.signUp(textFieldUsername.getText(), textFieldName.getText(), textFieldPassword.getText(), Integer.parseInt(textFieldAge.getText())) != null) {
+				
+			}
+		}
+		
 	}
 }
