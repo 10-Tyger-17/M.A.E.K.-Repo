@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.Controller;
+
 import java.awt.Color;
 import javax.swing.JToolBar;
 import java.awt.Insets;
@@ -23,18 +26,10 @@ public class WindowMenu extends JDialog implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JButton btnExit;
-	
-	public static void main(String[] args) {
-		try {
-			WindowMenu dialog = new WindowMenu();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private Controller cont;
 
-	public WindowMenu() {
+	public WindowMenu(Controller cont) {
+		this.cont=cont;
 		setBounds(100, 100, 910, 624);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(248, 249, 250));

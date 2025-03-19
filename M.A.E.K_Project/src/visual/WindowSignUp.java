@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.awt.Color;
 
 public class WindowSignUp extends JDialog implements ActionListener{
@@ -111,12 +113,45 @@ public class WindowSignUp extends JDialog implements ActionListener{
 		btnSignUp.addActionListener(this);
 		contentPanel.add(btnSignUp);
 	}
+	
+	public int changeColors(ArrayList<JTextField> fields) {
+		int count;
+
+		count = 0;
+		for (JTextField i : fields) {
+			if (i.getText().equals("")) {
+				i.setBackground(new Color(255, 120, 120));
+			} else {
+				count++;
+				i.setBackground(new Color(173, 181, 189));
+			}
+		}
+		
+		return count;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== btnSignUp) {
-			if(cont.signUp(textFieldUsername.getText(), textFieldName.getText(), textFieldPassword.getText(), Integer.parseInt(textFieldAge.getText())) != null) {
+			boolean valid=false;
+			
+			ArrayList<JTextField> fields=new ArrayList<JTextField>();
+			fields.add(textFieldUsername);
+			fields.add(textFieldName);
+			fields.add(textFieldPassword);
+			fields.add(textFieldAge);
+			
+			if (changeColors(fields) == 4) {
+				try {
+					cont.signUp(textFieldUsername.getText(), textFieldName.getText(), textFieldPassword.getText(), Integer.parseInt(textFieldAge.getText()));
+					valid=true;
+				} catch (NumberFormatException ex) {
+					textFieldAge.setBackground(new Color(255, 120, 120));
+				}
 				
+				if(valid) {
+					this.dispose();
+				}
 			}
 		}
 		
