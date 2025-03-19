@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +23,7 @@ public class ImplementDB implements ModelDAO {
 
 	final String SQLLOGIN = "SELECT * FROM client WHERE username = ? && client_password = ?;";
 	final String SQLTASKS = "SELECT * FROM task WHERE username = ?;";
+	final String SQLSETTASKS = "INSERT INTO task (task_name, task_description, due_date, task_state, username, category_id) VALUES (?, ?, ?, ?, ?, ?);";
 	final String SQLSIGNUP = "CALL SIGNUP(?,?,?,?);";
 	
 	public ImplementDB() {
@@ -128,5 +130,34 @@ public class ImplementDB implements ModelDAO {
 		}
 		
 		return tasks;
+	}
+	
+	@Override
+	public boolean setTask(Task task) {
+		boolean error = false;
+		
+		this.openConnection();
+		
+		try {
+			stmt = con.prepareStatement(SQLSETTASKS);
+			stmt.setString(1, task.getTask_name());
+			stmt.setString(2, task.getTask_description());
+			stmt.setDate(3, Date.valueOf(task.getDue_date()));
+			stmt.setString(4, task.getTask_state().value());
+			stmt.setString(5, task.getUsername());
+			stmt.setInt(6, task.getCategory_id());
+			
+			if (stmt.executeUpdate() == 0) {
+				error = true;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Error login: " + e.getMessage());
+			error = true;
+		} finally {
+			this.closeConnection();
+		}
+		
+		return error;
 	}
 }

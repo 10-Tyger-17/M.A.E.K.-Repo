@@ -25,5 +25,7 @@ public class Controller {
 	public ArrayList<Task> getTasks(Client client){
 		return dao.getTasks(client);
 	}
-
+	public boolean setTask(Task task){
+		return dao.setTask(task);
+	}
 }
