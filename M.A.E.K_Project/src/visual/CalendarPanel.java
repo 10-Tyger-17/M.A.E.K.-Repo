@@ -5,6 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
+/*
+ CalendarPanel calendarPanel = new CalendarPanel(2025, 2); // Marzo de 2025
+ frame.add(calendarPanel);
+
+ frame.setVisible(true);
+*/
+
 public class CalendarPanel extends JPanel {
     private int year, month;
     private JTable calendarTable;
