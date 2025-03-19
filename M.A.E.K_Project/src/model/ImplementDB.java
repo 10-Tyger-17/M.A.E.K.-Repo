@@ -124,7 +124,7 @@ public class ImplementDB implements ModelDAO {
 			
 			tasks.sort(Comparator.comparing(Task::getDue_date));
 		} catch (SQLException e) {
-			System.out.println("Error login: " + e.getMessage());
+			System.out.println("Error getTasks: " + e.getMessage());
 		} finally {
 			this.closeConnection();
 		}
@@ -152,7 +152,7 @@ public class ImplementDB implements ModelDAO {
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("Error login: " + e.getMessage());
+			System.out.println("Error setTask: " + e.getMessage());
 			error = true;
 		} finally {
 			this.closeConnection();
