@@ -22,9 +22,10 @@ public class ImplementDB implements ModelDAO {
 	private String passwordBD;
 
 	final String SQLLOGIN = "SELECT * FROM client WHERE username = ? && client_password = ?;";
-	final String SQLTASKS = "SELECT * FROM task WHERE username = ?;";
-	final String SQLSETTASKS = "INSERT INTO task (task_name, task_description, due_date, task_state, username, category_id) VALUES (?, ?, ?, ?, ?, ?);";
 	final String SQLSIGNUP = "CALL SIGNUP(?,?,?,?);";
+	final String SQLTASKS = "SELECT * FROM task WHERE username = ?;";
+	final String SQLSETTASK = "INSERT INTO task (task_name, task_description, due_date, task_state, username, category_id) VALUES (?, ?, ?, ?, ?, ?);";
+	final String SQLREMOVETASK = "DELETE FROM task WHERE id = ?;";
 	
 	public ImplementDB() {
 		this.configFile = ResourceBundle.getBundle("configs.configClase");
@@ -139,7 +140,7 @@ public class ImplementDB implements ModelDAO {
 		this.openConnection();
 		
 		try {
-			stmt = con.prepareStatement(SQLSETTASKS);
+			stmt = con.prepareStatement(SQLSETTASK);
 			stmt.setString(1, task.getTask_name());
 			stmt.setString(2, task.getTask_description());
 			stmt.setDate(3, Date.valueOf(task.getDue_date()));
@@ -153,6 +154,30 @@ public class ImplementDB implements ModelDAO {
 			
 		} catch (SQLException e) {
 			System.out.println("Error setTask: " + e.getMessage());
+			error = true;
+		} finally {
+			this.closeConnection();
+		}
+		
+		return error;
+	}
+
+	@Override
+	public boolean removeTask(Task task) {
+		boolean error = false;
+		
+		this.openConnection();
+		
+		try {
+			stmt = con.prepareStatement(SQLREMOVETASK);
+			stmt.setInt(1, task.getId());
+			
+			if (stmt.executeUpdate() == 0) {
+				error = true;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Error removeTask: " + e.getMessage());
 			error = true;
 		} finally {
 			this.closeConnection();

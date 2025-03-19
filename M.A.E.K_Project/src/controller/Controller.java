@@ -28,4 +28,7 @@ public class Controller {
 	public boolean setTask(Task task){
 		return dao.setTask(task);
 	}
+	public boolean removeTask(Task task){
+		return dao.removeTask(task);
+	}
 }
