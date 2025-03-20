@@ -1,7 +1,6 @@
 package visual;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -27,7 +26,8 @@ import javax.swing.JTextField;
 import java.awt.Color;
 
 public class WindowShowTasks extends JDialog implements ActionListener{
-
+	private static final long serialVersionUID = 1L;
+	
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private JTextField textFieldCategory;
@@ -49,7 +49,7 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 	public WindowShowTasks(JFrame parent, Client client, Controller cont) {
 		this.cont = cont;
 		this.client = client;
-		setBounds(100, 100, 464, 532);
+		setBounds(100, 100, 550, 532);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -66,7 +66,7 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 		contentPanel.add(lblTasks);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 124, 391, 179);
+		scrollPane.setBounds(12, 124, 512, 197);
 		contentPanel.add(scrollPane);
 		
 		table = new JTable();
@@ -79,33 +79,41 @@ public class WindowShowTasks extends JDialog implements ActionListener{
                     return false;               
             };
         };
+        table.setRowHeight(20);
+        table.getColumnModel().getColumn(0).setPreferredWidth(10);
+        table.getColumnModel().getColumn(1).setPreferredWidth(60);
+        table.getColumnModel().getColumn(2).setPreferredWidth(120);
+        table.getColumnModel().getColumn(3).setPreferredWidth(35);
+        table.getColumnModel().getColumn(4).setPreferredWidth(35);
+        table.getColumnModel().getColumn(5).setPreferredWidth(35);
 		scrollPane.setViewportView(table);
 		
 		chckbxPending = new JCheckBox("Pending");
 		chckbxPending.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		chckbxPending.setForeground(new Color(33, 37, 41));
-		chckbxPending.setBounds(26, 350, 157, 34);
+		chckbxPending.setBounds(76, 352, 157, 34);
 		contentPanel.add(chckbxPending);
 		
 		chckbxCompleted = new JCheckBox("Completed");
 		chckbxCompleted.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
-		chckbxCompleted.setBounds(27, 396, 183, 34);
+		chckbxCompleted.setBounds(77, 398, 183, 34);
 		contentPanel.add(chckbxCompleted);
 		
 		lblCategory = new JLabel("Category");
 		lblCategory.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
-		lblCategory.setBounds(248, 352, 117, 34);
+		lblCategory.setBounds(298, 354, 117, 34);
 		contentPanel.add(lblCategory);
 		
 		textFieldCategory = new JTextField();
-		textFieldCategory.setBounds(248, 382, 142, 31);
+		textFieldCategory.setBounds(298, 389, 142, 31);
 		contentPanel.add(textFieldCategory);
 		textFieldCategory.setColumns(10);
 		
 		btnExit = new JButton("Exit");
 		btnExit.setForeground(new Color(255, 255, 255));
 		btnExit.setBackground(new Color(33, 37, 41));
-		btnExit.setBounds(338, 470, 112, 25);
+		btnExit.setBounds(422, 468, 112, 25);
+		btnExit.addActionListener(this);
 		contentPanel.add(btnExit);
 		actualizarTabla();
 	}
@@ -113,8 +121,9 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		if (e.getSource() == btnExit) {
+			dispose();
+		}		
 	}
 	
 	private void actualizarTabla() {
