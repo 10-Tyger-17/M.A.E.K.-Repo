@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
 
 import controller.Controller;
+import model.Client;
 
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -33,6 +34,7 @@ public class WindowLogin extends JDialog implements ActionListener{
 	private Controller cont;
 	private JLabel lblUsername;
 	private JLabel lblPassword;
+	private Client client;
 	
 	public WindowLogin(Controller cont) {
 		this.cont = cont;
@@ -101,11 +103,12 @@ public class WindowLogin extends JDialog implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== btnLogIn) {
-			if(cont.login(textField.getText(), new String(passwordField.getPassword()))==null) {
+			client = cont.login(textField.getText(), new String(passwordField.getPassword()));
+			if(client==null) {
 				textField.setBackground(new Color(255,120,120));
 				passwordField.setBackground(new Color(255,120,120));
 			}else {
-				WindowMenu ventana=new WindowMenu(this, cont);
+				WindowMenu ventana=new WindowMenu(this, client, cont);
 				ventana.setVisible(true);
 				this.dispose();
 			}

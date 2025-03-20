@@ -19,6 +19,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
+import model.Client;
+
 import java.util.Calendar;
 
 public class WindowMenu extends JFrame implements ActionListener {
@@ -31,9 +33,11 @@ public class WindowMenu extends JFrame implements ActionListener {
     private JButton btnDeleteTask;
     private JButton btnModifyTask;
     private Controller cont;
+    private Client client;
 
-    public WindowMenu(JDialog parent, Controller cont) {
+    public WindowMenu(JDialog parent, Client client, Controller cont) {
         this.cont = cont;
+        this.client = client;
         setBounds(100, 100, 910, 624);
         getContentPane().setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -147,7 +151,7 @@ public class WindowMenu extends JFrame implements ActionListener {
         if (e.getSource() == btnExit) {
             this.dispose();
         }else if (e.getSource() == btnShowTasks) {
-            WindowShowTasks windowShowTasks = new WindowShowTasks(this, cont);
+            WindowShowTasks windowShowTasks = new WindowShowTasks(this, client, cont);
             windowShowTasks.setVisible(true);
         }
     }

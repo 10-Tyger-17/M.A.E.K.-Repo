@@ -12,12 +12,15 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
+import model.Client;
+import model.Task;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
@@ -35,12 +38,17 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 	private JCheckBox chckbxCompleted;
 	private JLabel lblCategory;
 	private JButton btnExit;
+	private DefaultTableModel model;
+	private Client client;
+	private Controller cont;
 
 
 	/**
 	 * Create the dialog.
 	 */
-	public WindowShowTasks(JFrame parent, Controller cont) {
+	public WindowShowTasks(JFrame parent, Client client, Controller cont) {
+		this.cont = cont;
+		this.client = client;
 		setBounds(100, 100, 464, 532);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,13 +71,14 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 		
 		table = new JTable();
 		table.setFont(new Font("Source Code Pro", Font.PLAIN, 15));
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"ID", "Name", "Description", "Due date", "State", "Category"
-			}
-		));
+		model = new DefaultTableModel(new String[]{"ID", "Name", "Description", "Due date", "State", "Category"}, 0);
+		table = new JTable(model) {
+            private static final long serialVersionUID = 1L;
+
+            public boolean isCellEditable(int row, int column) {                
+                    return false;               
+            };
+        };
 		scrollPane.setViewportView(table);
 		
 		chckbxPending = new JCheckBox("Pending");
@@ -98,6 +107,7 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 		btnExit.setBackground(new Color(33, 37, 41));
 		btnExit.setBounds(338, 470, 112, 25);
 		contentPanel.add(btnExit);
+		actualizarTabla();
 	}
 
 
@@ -106,4 +116,23 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	private void actualizarTabla() {
+    	ArrayList<Task> tasks = cont.getTasks(client);
+    	
+        model.setRowCount(0);
+        
+        for (Task task : tasks) {
+            String[] rowData = {
+            	String.valueOf(task.getId()),
+                task.getTask_name(),
+                task.getTask_description(),
+                String.valueOf(task.getDue_date()),
+                String.valueOf(task.getTask_state().value()),
+                String.valueOf(task.getCategory_id())
+            };
+            
+            model.addRow(rowData);
+        }
+    }
 }

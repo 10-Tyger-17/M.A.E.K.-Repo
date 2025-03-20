@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.Controller;
+import model.Client;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -36,7 +37,7 @@ public class WindowSignUp extends JDialog implements ActionListener{
 	private JButton btnSignUp;
 	private Controller cont;
 	private JDialog parent;
-	
+	private Client client;
 	
 
 	/**
@@ -153,7 +154,7 @@ public class WindowSignUp extends JDialog implements ActionListener{
 			
 			if (changeColors(fields) == 4) {
 				try {
-					cont.signUp(textFieldUsername.getText(), textFieldName.getText(), textFieldPassword.getText(), Integer.parseInt(textFieldAge.getText()));
+					client = cont.signUp(textFieldUsername.getText(), textFieldName.getText(), textFieldPassword.getText(), Integer.parseInt(textFieldAge.getText()));
 					valid=true;
 				} catch (NumberFormatException ex) {
 					textFieldAge.setBackground(new Color(255, 120, 120));
@@ -161,7 +162,7 @@ public class WindowSignUp extends JDialog implements ActionListener{
 				
 				if(valid) {
 					this.dispose();
-					WindowMenu ventana= new WindowMenu(parent, cont);
+					WindowMenu ventana= new WindowMenu(parent, client, cont);
 					ventana.setVisible(true);
 				}
 			}
