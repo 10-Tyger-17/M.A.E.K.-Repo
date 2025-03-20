@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,18 +21,19 @@ import javax.swing.table.DefaultTableModel;
 import controller.Controller;
 import java.util.Calendar;
 
-public class WindowMenu extends JDialog implements ActionListener {
+public class WindowMenu extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private final JPanel contentPanel = new JPanel();
     private JButton btnExit;
     private Controller cont;
 
-    public WindowMenu(JFrame parent, Controller cont) {
-    	super(parent, true);
+    public WindowMenu(JDialog parent, Controller cont) {
         this.cont = cont;
         setBounds(100, 100, 910, 624);
         getContentPane().setLayout(new BorderLayout());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(WindowLogin.class.getResource("/visual/Assets/Logo.jpg")));
         contentPanel.setBackground(new Color(248, 249, 250));
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -92,10 +94,11 @@ public class WindowMenu extends JDialog implements ActionListener {
         calendarPanel.setLayout(new BorderLayout());
         contentPanel.add(calendarPanel);
 
-        crearCalendario(calendarPanel);
+        createCalender(calendarPanel);
     }
 
-    private void crearCalendario(JPanel calendarPanel) {
+    private void createCalender(JPanel calendarPanel) {
+    	
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {

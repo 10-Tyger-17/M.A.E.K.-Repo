@@ -35,14 +35,14 @@ public class WindowSignUp extends JDialog implements ActionListener{
 	private JLabel lblPassword;
 	private JButton btnSignUp;
 	private Controller cont;
-	private JFrame parent;
+	private JDialog parent;
 	
 	
 
 	/**
 	 * Create the dialog.
 	 */
-	public WindowSignUp(JFrame parent,Controller cont) {
+	public WindowSignUp(JDialog parent,Controller cont) {
 		super(parent,true);
 		this.parent=parent;
 		this.cont=cont;

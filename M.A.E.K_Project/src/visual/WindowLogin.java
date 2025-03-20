@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,7 +21,7 @@ import controller.Controller;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class WindowLogin extends JFrame implements ActionListener{
+public class WindowLogin extends JDialog implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -37,7 +39,6 @@ public class WindowLogin extends JFrame implements ActionListener{
 		setBackground(new Color(173, 181, 189));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowLogin.class.getResource("/visual/Assets/Logo.jpg")));
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 530);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(224, 224, 224));
