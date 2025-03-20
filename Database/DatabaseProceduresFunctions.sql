@@ -10,6 +10,4 @@ select concat ('Añadido pedido con referencia ',username) Mensaje; end if;
 end//
 DELIMITER ;
 
-call SignUp("ekaitz123", "Ekaitz", "1234", 23);
-
 

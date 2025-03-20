@@ -88,7 +88,7 @@ public class WindowMenu extends JDialog implements ActionListener {
         btnExit.addActionListener(this);
 
         JPanel calendarPanel = new JPanel();
-        calendarPanel.setBounds(20, 131, 860, 402);
+        calendarPanel.setBounds(20, 131, 860, 323);
         calendarPanel.setLayout(new BorderLayout());
         contentPanel.add(calendarPanel);
 
