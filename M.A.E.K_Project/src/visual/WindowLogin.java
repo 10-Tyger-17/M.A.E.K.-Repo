@@ -114,6 +114,7 @@ public class WindowLogin extends JDialog implements ActionListener{
 		if(e.getSource()==btnSignUp) {
 			WindowSignUp WindowSignUp = new WindowSignUp(this,cont);
 			WindowSignUp.setVisible(true);
+			this.dispose();
 		}
 			
 	}

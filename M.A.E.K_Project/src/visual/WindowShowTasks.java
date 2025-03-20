@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -15,6 +16,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+import controller.Controller;
+
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import java.awt.Color;
@@ -36,7 +40,7 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 	/**
 	 * Create the dialog.
 	 */
-	public WindowShowTasks() {
+	public WindowShowTasks(JFrame parent, Controller cont) {
 		setBounds(100, 100, 464, 532);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
