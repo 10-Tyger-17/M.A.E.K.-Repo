@@ -9,17 +9,17 @@ public class Task {
 	private LocalDate due_date;
 	private Task_state_Enum task_state;
 	private String username;
-	private int category_id;
+	private String category;
 	
 	public Task(int id, String task_name, String task_description, LocalDate due_date, Task_state_Enum task_state,
-			String username, int category_id) {
+			String username, String category) {
 		this.id = id;
 		this.task_name = task_name;
 		this.task_description = task_description;
 		this.due_date = due_date;
 		this.task_state = task_state;
 		this.username = username;
-		this.category_id = category_id;
+		this.category = category;
 	}
 
 	public int getId() {
@@ -70,18 +70,18 @@ public class Task {
 		this.username = username;
 	}
 
-	public int getCategory_id() {
-		return category_id;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	@Override
 	public String toString() {
 		return "Task [id=" + id + ", task_name=" + task_name + ", task_description=" + task_description + ", due_date="
-				+ due_date + ", task_state=" + task_state + ", username=" + username + ", category_id=" + category_id
+				+ due_date + ", task_state=" + task_state + ", username=" + username + ", category=" + category
 				+ "]";
 	}
 	

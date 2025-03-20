@@ -129,7 +129,7 @@ public class WindowShowTasks extends JDialog implements ActionListener{
                 task.getTask_description(),
                 String.valueOf(task.getDue_date()),
                 String.valueOf(task.getTask_state().value()),
-                String.valueOf(task.getCategory_id())
+                task.getCategory()
             };
             
             model.addRow(rowData);

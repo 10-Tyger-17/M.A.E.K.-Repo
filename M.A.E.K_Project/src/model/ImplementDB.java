@@ -123,7 +123,7 @@ public class ImplementDB implements ModelDAO {
 			result = stmt.executeQuery();
 
 			while (result.next()) {
-				tasks.add(new Task(result.getInt(1), result.getString(2), result.getString(3), result.getDate(4).toLocalDate(), Task_state_Enum.valueOf(result.getString(5).toUpperCase()), result.getString(6), result.getInt(7)));
+				tasks.add(new Task(result.getInt(1), result.getString(2), result.getString(3), result.getDate(4).toLocalDate(), Task_state_Enum.valueOf(result.getString(5)), result.getString(6), result.getString(7)));
 			}
 			
 			tasks.sort(Comparator.comparing(Task::getDue_date));
@@ -149,7 +149,7 @@ public class ImplementDB implements ModelDAO {
 			stmt.setDate(3, Date.valueOf(task.getDue_date()));
 			stmt.setString(4, task.getTask_state().value());
 			stmt.setString(5, task.getUsername());
-			stmt.setInt(6, task.getCategory_id());
+			stmt.setString(6, task.getCategory());
 			
 			if (stmt.executeUpdate() == 0) {
 				error = true;
