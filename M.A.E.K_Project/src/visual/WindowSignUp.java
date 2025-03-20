@@ -35,6 +35,7 @@ public class WindowSignUp extends JDialog implements ActionListener{
 	private JLabel lblPassword;
 	private JButton btnSignUp;
 	private Controller cont;
+	private JFrame parent;
 	
 	
 
@@ -43,7 +44,8 @@ public class WindowSignUp extends JDialog implements ActionListener{
 	 */
 	public WindowSignUp(JFrame parent,Controller cont) {
 		super(parent,true);
-		this.cont= cont;
+		this.parent=parent;
+		this.cont=cont;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowSignUp.class.getResource("/visual/Assets/Logo.jpg")));
 		setBounds(100, 100, 464, 532);
 		getContentPane().setLayout(new BorderLayout());
@@ -140,7 +142,7 @@ public class WindowSignUp extends JDialog implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()== btnSignUp) {
+		if(e.getSource() == btnSignUp) {
 			boolean valid=false;
 			
 			ArrayList<JTextField> fields=new ArrayList<JTextField>();
@@ -159,6 +161,8 @@ public class WindowSignUp extends JDialog implements ActionListener{
 				
 				if(valid) {
 					this.dispose();
+					WindowMenu ventana= new WindowMenu(parent, cont);
+					ventana.setVisible(true);
 				}
 			}
 		}

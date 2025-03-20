@@ -99,8 +99,8 @@ public class ImplementDB implements ModelDAO {
 			result = stmt.executeQuery();
 			result.next();
 
-			if (result.getString("Mensaje").contains("Añadido pedido con referencia")) {
-			    client = new Client(result.getString(1), result.getString(2), result.getString(3), result.getInt(4));
+			if (result.getString("Mensaje") != null) {
+			    client = new Client(username, client_name, client_password, age);
 			}
 		} catch (SQLException e) {
 			System.out.println("Error signUp: " + e.getMessage());
