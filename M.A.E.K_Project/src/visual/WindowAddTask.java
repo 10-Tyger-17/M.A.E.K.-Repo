@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.Controller;
+import model.Client;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -41,7 +42,8 @@ public class WindowAddTask extends JDialog implements ActionListener {
 	private ButtonGroup btnGroupPC;
 	private Controller cont;
 
-	public WindowAddTask(JFrame parent, Controller cont) {
+	public WindowAddTask(JFrame parent, Client client, Controller cont) {
+		super(parent, true);
 		this.cont = cont;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowAddTask.class.getResource("/visual/Assets/Logo.jpg")));
 		setBounds(100, 100, 464, 532);

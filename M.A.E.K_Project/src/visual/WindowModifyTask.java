@@ -4,8 +4,13 @@ import java.awt.BorderLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.Controller;
+import model.Client;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -24,8 +29,11 @@ public class WindowModifyTask extends JDialog {
 	private JTextField textFieldDueDate;
 	private JTextField textFieldCategory;
 	private JButton btnExit;
+	private Controller cont;
 
-	public WindowModifyTask() {
+	public WindowModifyTask(JFrame parent, Client client, Controller cont) {
+		super(parent, true);
+		this.cont = cont;
 		setBounds(100, 100, 542, 472);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(248, 249, 250));
