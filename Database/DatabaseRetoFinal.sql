@@ -10,8 +10,7 @@ age INT
 );
 -- Table category creation
 CREATE TABLE category(
-id INT AUTO_INCREMENT PRIMARY KEY,
-category_name VARCHAR(255) UNIQUE,
+category_name VARCHAR(255) UNIQUE PRIMARY KEY,
 category_description VARCHAR(255)
 );
 -- Table task creation
@@ -20,7 +19,7 @@ id INT AUTO_INCREMENT PRIMARY KEY,
 task_name VARCHAR(255) NOT NULL,
 task_description VARCHAR(255),
 due_date DATE,
-task_state ENUM('pending', 'completed') DEFAULT 'pending',
+task_state ENUM('PENDING', 'COMPLETED') DEFAULT 'PENDING',
 username VARCHAR(255),
 category_id INT,
 FOREIGN KEY (username) REFERENCES client(username) ON UPDATE CASCADE ON DELETE CASCADE,
