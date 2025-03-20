@@ -1,7 +1,6 @@
 package visual;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,8 +15,8 @@ import java.awt.Color;
 import javax.swing.JTextField;
 
 public class WindowModifyTask extends JDialog {
-
 	private static final long serialVersionUID = 1L;
+	
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldID;
 	private JTextField textFieldName;
@@ -26,22 +25,6 @@ public class WindowModifyTask extends JDialog {
 	private JTextField textFieldCategory;
 	private JButton btnExit;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			WindowModifyTask dialog = new WindowModifyTask();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public WindowModifyTask() {
 		setBounds(100, 100, 542, 472);
 		getContentPane().setLayout(new BorderLayout());
@@ -56,7 +39,7 @@ public class WindowModifyTask extends JDialog {
 		lblModifyTask.setBounds(0, 0, 526, 84);
 		contentPanel.add(lblModifyTask);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<>();
 		comboBox.setBackground(new Color(173, 181, 189));
 		comboBox.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		comboBox.setBounds(19, 104, 490, 29);

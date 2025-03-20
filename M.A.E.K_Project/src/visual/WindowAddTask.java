@@ -23,7 +23,8 @@ import javax.swing.JRadioButton;
 import java.awt.Color;
 
 public class WindowAddTask extends JDialog implements ActionListener {
-
+	private static final long serialVersionUID = 1L;
+	
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldName;
 	private JTextField textFieldDescription;
@@ -40,12 +41,6 @@ public class WindowAddTask extends JDialog implements ActionListener {
 	private ButtonGroup btnGroupPC;
 	private Controller cont;
 
-
-
-
-	/**
-	 * Create the dialog.
-	 */
 	public WindowAddTask(JFrame parent, Controller cont) {
 		this.cont = cont;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowAddTask.class.getResource("/visual/Assets/Logo.jpg")));
@@ -126,12 +121,8 @@ public class WindowAddTask extends JDialog implements ActionListener {
 
 	}
 
-
-
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-
 	}
 }
