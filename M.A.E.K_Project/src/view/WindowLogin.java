@@ -1,4 +1,4 @@
-package visual;
+package view;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -64,6 +64,7 @@ public class WindowLogin extends JDialog implements ActionListener{
 		btnLogIn.setBackground(new Color(33, 37, 41));
 		btnLogIn.setBounds(46, 327, 659, 45);
 		btnLogIn.addActionListener(this);
+		
 		contentPane.add(btnLogIn);
 		
 		passwordField = new JPasswordField();
@@ -120,4 +121,6 @@ public class WindowLogin extends JDialog implements ActionListener{
 		}
 			
 	}
+	
+	
 }

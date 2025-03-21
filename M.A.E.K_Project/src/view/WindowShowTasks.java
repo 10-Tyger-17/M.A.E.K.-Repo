@@ -1,7 +1,8 @@
-package visual;
+package view;
 
 import java.awt.BorderLayout;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -18,20 +19,20 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
+import model.Category;
 import model.Client;
 import model.Task;
 import model.Task_state_Enum;
 
 import javax.swing.JCheckBox;
-import javax.swing.JTextField;
 import java.awt.Color;
+import javax.swing.JComboBox;
 
 public class WindowShowTasks extends JDialog implements ActionListener{
 	private static final long serialVersionUID = 1L;
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
-	private JTextField textFieldCategory;
 	private JLabel lblShowTasks;
 	private JLabel lblTasks;
 	private JScrollPane scrollPane;
@@ -42,11 +43,8 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 	private DefaultTableModel model;
 	private Client client;
 	private Controller cont;
+	private JComboBox<String> comboBox;
 
-
-	/**
-	 * Create the dialog.
-	 */
 	public WindowShowTasks(JFrame parent, Client client, Controller cont) {
 		this.cont = cont;
 		this.client = client;
@@ -107,11 +105,6 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 		lblCategory.setBounds(298, 354, 117, 34);
 		contentPanel.add(lblCategory);
 
-		textFieldCategory = new JTextField();
-		textFieldCategory.setBounds(298, 389, 142, 31);
-		contentPanel.add(textFieldCategory);
-		textFieldCategory.setColumns(10);
-
 		btnExit = new JButton("Exit");
 		btnExit.setForeground(new Color(255, 255, 255));
 		btnExit.setBackground(new Color(33, 37, 41));
@@ -119,67 +112,63 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 		btnExit.addActionListener(this);
 		contentPanel.add(btnExit);
 		
-		actualizarTabla(true, true);
+		comboBox = new JComboBox<>();
+		ArrayList<Category> categories = cont.getCategories(client);
+		String[] categoryNames = new String[categories.size()];
+		for (int i = 0; i < categories.size(); i++) {
+		    categoryNames[i] = categories.get(i).getCategory_name();
+		}
+		comboBox.setModel(new DefaultComboBoxModel<>(categoryNames));
+        comboBox.setSelectedIndex(-1);
+		comboBox.setFont(new Font("Source Code Pro", Font.PLAIN, 16));
+		comboBox.setBounds(298, 398, 142, 25);
+		contentPanel.add(comboBox);
+		comboBox.addActionListener(this);
+		
+		actualizarTabla(true, true, null);
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnExit) {
-			dispose();
-		} else if (e.getSource() == chckbxPending || e.getSource() == chckbxCompleted) {
-			actualizarTabla(chckbxCompleted.isSelected(), chckbxPending.isSelected());
-		}
+	    if (e.getSource() == btnExit) {
+	        dispose();
+	    } else if (e.getSource() == chckbxPending || e.getSource() == chckbxCompleted) {
+	        actualizarTabla(chckbxCompleted.isSelected(), chckbxPending.isSelected(), null);
+	    } else if (e.getSource() == comboBox) {
+	        actualizarTabla(true, true, String.valueOf(comboBox.getSelectedItem()));
+	    }
 	}
 
-	private void actualizarTabla(boolean completed, boolean pending) {
-		ArrayList<Task> tasks = cont.getTasks(client);
+	private void actualizarTabla(boolean completed, boolean pending, String category) {
+	    ArrayList<Task> tasks = cont.getTasks(client);
+	    boolean isCategoryMatch = false;;
+        boolean isStateMatch = false;
+        
+	    model.setRowCount(0);
 
-		model.setRowCount(0);
+	    for (Task task : tasks) {
+	    	isCategoryMatch = category == null || category.equalsIgnoreCase(task.getCategory());
+	    	
+	        if (!completed && !pending) {
+	            isStateMatch = true;
+	        } else {
+	            isStateMatch = (completed && task.getTask_state().equals(Task_state_Enum.COMPLETED)) || (pending && task.getTask_state().equals(Task_state_Enum.PENDING));
+	        }
 
-		for (Task task : tasks) {
-			if (!completed && !pending) {
-				String[] rowData = {
-						String.valueOf(task.getId()),
-						task.getTask_name(),
-						task.getTask_description(),
-						String.valueOf(task.getDue_date()),
-						String.valueOf(task.getTask_state().value()),
-						task.getCategory()
-				};
-
-				model.addRow(rowData);
-			} else {
-				if (completed) {
-					if (task.getTask_state().equals(Task_state_Enum.COMPLETED)) {
-						String[] rowData = {
-								String.valueOf(task.getId()),
-								task.getTask_name(),
-								task.getTask_description(),
-								String.valueOf(task.getDue_date()),
-								String.valueOf(task.getTask_state().value()),
-								task.getCategory()
-						};
-
-						model.addRow(rowData);
-					}
-				}
-				
-				if (pending) {
-					if (task.getTask_state().equals(Task_state_Enum.PENDING)) {
-						String[] rowData = {
-								String.valueOf(task.getId()),
-								task.getTask_name(),
-								task.getTask_description(),
-								String.valueOf(task.getDue_date()),
-								String.valueOf(task.getTask_state().value()),
-								task.getCategory()
-						};
-
-						model.addRow(rowData);
-					}
-				}
-			}
-		}
+	        if (isCategoryMatch && isStateMatch) {
+	            String[] rowData = {
+	                String.valueOf(task.getId()),
+	                task.getTask_name(),
+	                task.getTask_description(),
+	                String.valueOf(task.getDue_date()),
+	                String.valueOf(task.getTask_state().value()),
+	                task.getCategory()
+	            };
+	            
+	            model.addRow(rowData);
+	        }
+	    }
 	}
+
 }

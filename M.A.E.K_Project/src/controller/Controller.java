@@ -2,11 +2,12 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.Category;
 import model.Client;
 import model.ImplementDB;
 import model.ModelDAO;
 import model.Task;
-import visual.WindowLogin;
+import view.WindowLogin;
 
 public class Controller {
 	
@@ -21,6 +22,9 @@ public class Controller {
 	}
 	public Client signUp(String username, String client_name, String client_password, int age) {
 		return dao.signUp(username, client_name, client_password, age);
+	}
+	public ArrayList<Category> getCategories(Client client){
+		return dao.getCategories(client);
 	}
 	public ArrayList<Task> getTasks(Client client){
 		return dao.getTasks(client);

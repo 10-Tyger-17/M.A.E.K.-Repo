@@ -23,6 +23,7 @@ public class ImplementDB implements ModelDAO {
 
 	final String SQLLOGIN = "SELECT * FROM client WHERE username = ? && client_password = ?;";
 	final String SQLSIGNUP = "CALL SIGNUP(?,?,?,?);";
+	final String SQLCATEGORIES = "SELECT * FROM category WHERE category_name = (SELECT category_name FROM task WHERE username = ?);";
 	final String SQLTASKS = "SELECT * FROM task WHERE username = ?;";
 	final String SQLSETTASK = "INSERT INTO task (task_name, task_description, due_date, task_state, username, category_id) VALUES (?, ?, ?, ?, ?, ?);";
 	final String SQLREMOVETASK = "DELETE FROM task WHERE id = ?;";
@@ -109,6 +110,31 @@ public class ImplementDB implements ModelDAO {
 		}
 		
 		return client;
+	}
+	
+	@Override
+	public ArrayList<Category> getCategories(Client client) {
+		ArrayList<Category> categories = new ArrayList<>();
+		
+		this.openConnection();
+		
+		try {
+			stmt = con.prepareStatement(SQLCATEGORIES);
+			stmt.setString(1, client.getUsername());
+			result = stmt.executeQuery();
+
+			while (result.next()) {
+				categories.add(new Category(result.getString(1), result.getString(2)));
+			}
+			
+			categories.sort(Comparator.comparing(Category::getCategory_name));
+		} catch (SQLException e) {
+			System.out.println("Error getCategories: " + e.getMessage());
+		} finally {
+			this.closeConnection();
+		}
+		
+		return categories;
 	}
 
 	@Override
