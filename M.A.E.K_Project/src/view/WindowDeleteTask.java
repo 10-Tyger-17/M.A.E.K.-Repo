@@ -34,11 +34,13 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 	private JButton btnDelete;
 	private JLabel lblDeleteTask;
 	private JLabel lblTaskToBeDelete;
-	private JComboBox<String> comboBox;
+	private JComboBox<Task> comboBox;
+	private Client client;
 
 	public WindowDeleteTask(JFrame parent, Client client, Controller cont) {
 		super(parent, true);
 		this.cont = cont;
+		this.client=client;
 		setBounds(100, 100, 542, 472);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(248, 249, 250));
@@ -81,20 +83,20 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		btnDelete.addActionListener(this);
 		contentPanel.add(btnDelete);
 		
-		comboBox = new JComboBox<String>();
-		for(int i=0;i<uploadTask(client).size();i++) {
-		comboBox.addItem(uploadTask(client).get(i).toString());
-		}
+		
 		
 		comboBox.setBounds(75, 206, 384, 22);
 		contentPanel.add(comboBox);
 		;
 	}
 	
-	public ArrayList<Task> uploadTask(Client client) {
-		ArrayList<Task> tasks;
-		tasks = cont.getTasks(client);
-		return  tasks;
+	public void uploadTask(Client client) {
+		ArrayList<Task> tasks = cont.getTasks(client);
+		comboBox = new JComboBox<Task>();
+		comboBox.removeAll();
+		for(int i=0;i<tasks.size();i++) {
+		comboBox.addItem(tasks.get(i));
+		}
 	}
 
 
@@ -103,7 +105,11 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		if(e.getSource()== btnExit) {
 			this.dispose();
 		}else if(e.getSource()==btnDelete) {
-			cont.removeTask(comboBox.getSelectedItem());
+			
+			if(comboBox.getItemCount()!=0) {
+			cont.removeTask((Task) comboBox.getSelectedItem());
+			uploadTask(client);
+			}
 		}
 
 

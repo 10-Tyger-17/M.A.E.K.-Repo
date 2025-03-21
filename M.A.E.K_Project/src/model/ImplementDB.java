@@ -199,7 +199,7 @@ public class ImplementDB implements ModelDAO {
 		
 		try {
 			stmt = con.prepareStatement(SQLREMOVETASK);
-			stmt.setInt(1, task.getId());
+			stmt.setInt(1,task.getId());
 			
 			if (stmt.executeUpdate() == 0) {
 				error = true;
