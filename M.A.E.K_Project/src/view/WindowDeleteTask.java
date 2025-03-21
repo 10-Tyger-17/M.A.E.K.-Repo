@@ -53,7 +53,7 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		lblDeleteTask.setFont(new Font("Source Code Pro", Font.PLAIN, 72));
 		lblDeleteTask.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblDeleteTask);
-		uploadTask(client);
+		
 		
 		
 		
@@ -84,15 +84,15 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		contentPanel.add(btnDelete);
 		
 		
-		
+		comboBox = new JComboBox<Task>();
 		comboBox.setBounds(75, 206, 384, 22);
 		contentPanel.add(comboBox);
-		;
+		comboBox.setSelectedIndex(-1);
+		uploadTask(client);
 	}
 	
 	public void uploadTask(Client client) {
 		ArrayList<Task> tasks = cont.getTasks(client);
-		comboBox = new JComboBox<Task>();
 		comboBox.removeAll();
 		for(int i=0;i<tasks.size();i++) {
 		comboBox.addItem(tasks.get(i));
@@ -105,11 +105,11 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		if(e.getSource()== btnExit) {
 			this.dispose();
 		}else if(e.getSource()==btnDelete) {
-			
 			if(comboBox.getItemCount()!=0) {
-			cont.removeTask((Task) comboBox.getSelectedItem());
-			uploadTask(client);
+			cont.removeTask((Task)comboBox.getSelectedItem());
+			
 			}
+			uploadTask(client);
 		}
 
 
