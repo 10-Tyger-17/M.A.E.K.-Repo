@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -17,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
@@ -39,17 +41,17 @@ public class WindowMenu extends JFrame implements ActionListener {
 	private JButton btnAddTask;
 	private JButton btnDeleteTask;
 	private JButton btnModifyTask;
-    private JButton btnPrevMonth;
-    private JButton btnNextMonth;
-    private JButton btnPrevYear;
-    private JButton btnNextYear;
+	private JButton btnPrevMonth;
+	private JButton btnNextMonth;
+	private JButton btnPrevYear;
+	private JButton btnNextYear;
 	private Controller cont;
 	private Client client;
 	private JPanel calendarPanel;
-    private int currentMonth;
-    private int currentYear;
-    private JLabel lblMonth;
-    private JLabel lblYear;
+	private int currentMonth;
+	private int currentYear;
+	private JLabel lblMonth;
+	private JLabel lblYear;
 
 	public WindowMenu(Client client, Controller cont) {
 		this.cont = cont;
@@ -110,54 +112,54 @@ public class WindowMenu extends JFrame implements ActionListener {
 		calendarPanel.setLayout(new BorderLayout());
 		contentPanel.add(calendarPanel);
 
-        btnPrevYear = new JButton("<<");
-        btnPrevYear.setBounds(20, 100, 50, 25);
-        contentPanel.add(btnPrevYear);
+		btnPrevYear = new JButton("<<");
+		btnPrevYear.setBounds(20, 100, 50, 25);
+		contentPanel.add(btnPrevYear);
 
-        btnPrevMonth = new JButton("<");
-        btnPrevMonth.setBounds(80, 100, 50, 25);
-        contentPanel.add(btnPrevMonth);
+		btnPrevMonth = new JButton("<");
+		btnPrevMonth.setBounds(80, 100, 50, 25);
+		contentPanel.add(btnPrevMonth);
 
-        btnNextMonth = new JButton(">");
-        btnNextMonth.setBounds(770, 100, 50, 25);
-        contentPanel.add(btnNextMonth);
+		btnNextMonth = new JButton(">");
+		btnNextMonth.setBounds(770, 100, 50, 25);
+		contentPanel.add(btnNextMonth);
 
-        btnNextYear = new JButton(">>");
-        btnNextYear.setBounds(830, 100, 50, 25);
-        contentPanel.add(btnNextYear);
-        
-        lblMonth = new JLabel("");
-        lblMonth.setFont(new Font("Source Code Pro", Font.PLAIN, 25));
-        lblMonth.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMonth.setBounds(326, 94, 233, 33);
-        contentPanel.add(lblMonth);
-        
-        lblYear = new JLabel("");
-        lblYear.setFont(new Font("Source Code Pro", Font.PLAIN, 25));
-        lblYear.setHorizontalAlignment(SwingConstants.CENTER);
-        lblYear.setBounds(376, 61, 131, 25);
-        contentPanel.add(lblYear);
+		btnNextYear = new JButton(">>");
+		btnNextYear.setBounds(830, 100, 50, 25);
+		contentPanel.add(btnNextYear);
 
-        this.currentMonth = Calendar.getInstance().get(Calendar.MONTH);
-        this.currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		lblMonth = new JLabel("");
+		lblMonth.setFont(new Font("Source Code Pro", Font.PLAIN, 25));
+		lblMonth.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonth.setBounds(326, 94, 233, 33);
+		contentPanel.add(lblMonth);
+
+		lblYear = new JLabel("");
+		lblYear.setFont(new Font("Source Code Pro", Font.PLAIN, 25));
+		lblYear.setHorizontalAlignment(SwingConstants.CENTER);
+		lblYear.setBounds(376, 61, 131, 25);
+		contentPanel.add(lblYear);
+
+		this.currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+		this.currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		createCalendar();
 
 		btnExit.addActionListener(this);
-        btnShowTasks.addActionListener(this);
-        btnAddTask.addActionListener(this);
-        btnDeleteTask.addActionListener(this);
-        btnModifyTask.addActionListener(this);
-        btnPrevMonth.addActionListener(this);
-        btnNextMonth.addActionListener(this);
-        btnPrevYear.addActionListener(this);
-        btnNextYear.addActionListener(this);
-        
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                checkTasks();
-            }
-        });
+		btnShowTasks.addActionListener(this);
+		btnAddTask.addActionListener(this);
+		btnDeleteTask.addActionListener(this);
+		btnModifyTask.addActionListener(this);
+		btnPrevMonth.addActionListener(this);
+		btnNextMonth.addActionListener(this);
+		btnPrevYear.addActionListener(this);
+		btnNextYear.addActionListener(this);
+
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				checkTasks();
+			}
+		});
 	}
 
 	@Override
@@ -165,27 +167,27 @@ public class WindowMenu extends JFrame implements ActionListener {
 		if (e.getSource() == btnExit) {
 			this.dispose();
 		} else if (e.getSource() == btnPrevMonth) {
-            currentMonth--;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            }
-            createCalendar();
-        } else if (e.getSource() == btnNextMonth) {
-            currentMonth++;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            createCalendar();
-        } else if (e.getSource() == btnPrevYear) {
-            currentYear--;
-            createCalendar();
-        } else if (e.getSource() == btnNextYear) {
-            currentYear++;
-            createCalendar();
-        } else if (e.getSource() == btnShowTasks) {
-        	WindowShowTasks windowShowTasks = new WindowShowTasks(this, client, cont);
+			currentMonth--;
+			if (currentMonth < 0) {
+				currentMonth = 11;
+				currentYear--;
+			}
+			createCalendar();
+		} else if (e.getSource() == btnNextMonth) {
+			currentMonth++;
+			if (currentMonth > 11) {
+				currentMonth = 0;
+				currentYear++;
+			}
+			createCalendar();
+		} else if (e.getSource() == btnPrevYear) {
+			currentYear--;
+			createCalendar();
+		} else if (e.getSource() == btnNextYear) {
+			currentYear++;
+			createCalendar();
+		} else if (e.getSource() == btnShowTasks) {
+			WindowShowTasks windowShowTasks = new WindowShowTasks(this, client, cont);
 			windowShowTasks.setVisible(true);
 		} else if (e.getSource() == btnAddTask) {
 			WindowAddTask windowAddTask = new WindowAddTask(this, client, cont);
@@ -197,73 +199,111 @@ public class WindowMenu extends JFrame implements ActionListener {
 			WindowDeleteTask windowDeleteTask = new WindowDeleteTask(this, client, cont);
 			windowDeleteTask.setVisible(true);
 		}
-	
+
 	}
 
 	private void createCalendar() {
-        calendarPanel.removeAll();
+		calendarPanel.removeAll();
 
-        DefaultTableModel model = new DefaultTableModel() {
-            private static final long serialVersionUID = 1L;
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        
-        String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+		DefaultTableModel model = new DefaultTableModel() {
+			private static final long serialVersionUID = 1L;
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 
-        String[] columnNames = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        model.setColumnIdentifiers(columnNames);
+		String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
-        JTable table = new JTable(model);
-        table.setRowHeight(50);
-        table.setFillsViewportHeight(true);
-        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table.setCellSelectionEnabled(true);
+		String[] columnNames = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+		model.setColumnIdentifiers(columnNames);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(currentYear, currentMonth, 1);
-        int firstDay = calendar.get(Calendar.DAY_OF_WEEK);
-        int firstDayAdjusted = (firstDay == Calendar.SUNDAY) ? 6 : firstDay - 2;
-        int day = 1;
+		JTable table = new JTable(model);
+		table.setRowHeight(50);
+		table.setFillsViewportHeight(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setCellSelectionEnabled(true);
 
-        for (int row = 0; row < 6; row++) {
-            Object[] rowData = new Object[7];
-            for (int col = 0; col < 7; col++) {
-                rowData[col] = (row == 0 && col < firstDayAdjusted) || day > calendar.getActualMaximum(Calendar.DAY_OF_MONTH) ? "" : day++;
-            }
-            model.addRow(rowData);
-        }
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(currentYear, currentMonth, 1);
+		int firstDay = calendar.get(Calendar.DAY_OF_WEEK);
+		int firstDayAdjusted = (firstDay == Calendar.SUNDAY) ? 6 : firstDay - 2;
+		int day = 1;
 
-        calendarPanel.add(new JScrollPane(table), BorderLayout.CENTER);
-        calendarPanel.revalidate();
-        calendarPanel.repaint();
-        lblMonth.setText(monthNames[currentMonth]);
-        lblYear.setText(String.valueOf(currentYear));
-    }
-	
+		for (int row = 0; row < 6; row++) {
+			Object[] rowData = new Object[7];
+			for (int col = 0; col < 7; col++) {
+				if ((row == 0 && col < firstDayAdjusted) || day > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+					rowData[col] = "";
+				} else {
+					int currentDay = day;
+					rowData[col] = currentDay;
+
+					LocalDate currentDate = LocalDate.of(currentYear, currentMonth + 1, currentDay);
+					for (Task task : cont.getTasks(client)) {
+						if (task.getDue_date().equals(currentDate)) {
+							table.getColumnModel().getColumn(col).getCellRenderer();
+							table.setDefaultRenderer(Object.class, new ColorCellRenderer(row, col));
+						}
+					}
+					day++;
+				}
+			}
+			model.addRow(rowData);
+		}
+
+		calendarPanel.add(new JScrollPane(table), BorderLayout.CENTER);
+		calendarPanel.revalidate();
+		calendarPanel.repaint();
+		lblMonth.setText(monthNames[currentMonth]);
+		lblYear.setText(String.valueOf(currentYear));
+	}
+
+	class ColorCellRenderer extends DefaultTableCellRenderer {
+		private static final long serialVersionUID = 1L;
+		private final int targetRow;
+		private final int targetColumn;
+
+		public ColorCellRenderer(int targetRow, int targetColumn) {
+			this.targetRow = targetRow;
+			this.targetColumn = targetColumn;
+		}
+
+		@Override
+		public java.awt.Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+			if (row == targetRow && column == targetColumn) {
+				comp.setBackground(Color.ORANGE);
+			} else {
+				comp.setBackground(Color.WHITE);
+			}
+
+			return comp;
+		}
+	}
+
 	public void checkTasks() {
 		boolean exists = false;
 		boolean passed = false;
+
 		for (Task task : cont.getTasks(client)) {
 			if (ChronoUnit.DAYS.between(LocalDate.now(), task.getDue_date()) < 3) {
 				exists = true;
 			}
-			
+
 			if (task.getDue_date().isBefore(LocalDate.now())) {
 				cont.stateTask(task);
 				passed = true;
 			}
 		}
-		
+
 		if (exists) {
 			JOptionPane.showMessageDialog(this, "Check your tasks because there are some with 3 days or less remaining", "Warning", JOptionPane.WARNING_MESSAGE);
 		}
-		
+
 		if (passed) {
 			JOptionPane.showMessageDialog(this, "Some of your tasks have been marked as completed because the date has passed", "Warning", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 }
-

@@ -31,7 +31,7 @@ import java.awt.Color;
 
 public class WindowAddTask extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	
+
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldName;
 	private JTextField textFieldDescription;
@@ -136,7 +136,7 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		btnAdd.setBounds(28, 414, 391, 45);
 		btnAdd.addActionListener(this);
 		contentPanel.add(btnAdd);
-		
+
 		btnExit = new JButton("Exit");
 		btnExit.setForeground(Color.WHITE);
 		btnExit.setBorder(null);
@@ -151,18 +151,18 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		if (e.getSource() == btnAdd) {
 			try {
 				LocalDate dueDate = checkDate();
-                Task_state_Enum state = rdbtnPending.isSelected() ? Task_state_Enum.PENDING : Task_state_Enum.COMPLETED;
-                
-                if (!cont.setTask(new Task(0, textFieldName.getText(), textFieldDescription.getText(), dueDate, state, client.getUsername(), textFieldCategory.getText()))) {
-                	JOptionPane.showMessageDialog(this, "The task " + textFieldName.getText() + " is added succesfully", "Completed", JOptionPane.INFORMATION_MESSAGE);
-    				textFieldName.setText("");
-    				textFieldDescription.setText("");
-    				textFieldCategory.setText("");
-    				textFieldDueDate.setText("");
-    				rdbtnPending.setSelected(true);
-                } else {
-                	JOptionPane.showMessageDialog(this, "An error has ocurred adding the task", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+				Task_state_Enum state = rdbtnPending.isSelected() ? Task_state_Enum.PENDING : Task_state_Enum.COMPLETED;
+
+				if (!cont.setTask(new Task(0, textFieldName.getText(), textFieldDescription.getText(), dueDate, state, client.getUsername(), textFieldCategory.getText()))) {
+					JOptionPane.showMessageDialog(this, "The task " + textFieldName.getText() + " is added succesfully", "Completed", JOptionPane.INFORMATION_MESSAGE);
+					textFieldName.setText("");
+					textFieldDescription.setText("");
+					textFieldCategory.setText("");
+					textFieldDueDate.setText("");
+					rdbtnPending.setSelected(true);
+				} else {
+					JOptionPane.showMessageDialog(this, "An error has ocurred adding the task", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			} catch (IllegalDateException e1) {
 				JOptionPane.showMessageDialog(this, "There is a problem with the date\n" + e1.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
 			}
@@ -170,23 +170,23 @@ public class WindowAddTask extends JDialog implements ActionListener {
 			dispose();
 		}
 	}
-	
-	public LocalDate checkDate() throws IllegalDateException {
-	    String dateText = textFieldDueDate.getText();
-	    LocalDate dueDate = null;
 
-	    if (!dateText.isEmpty()) {
-	    	try {
-		        dueDate = LocalDate.parse(dateText);
-		        
-		        if (dueDate.isBefore(LocalDate.now())) {
-		            throw new IllegalDateException("The date can't be in the past.");
-		        }
-		    } catch (DateTimeParseException e) {
-		        throw new IllegalDateException("Date format invalid. Must be yyyy-MM-dd.");
-		    }
-	    }
-	    
+	public LocalDate checkDate() throws IllegalDateException {
+		String dateText = textFieldDueDate.getText();
+		LocalDate dueDate = null;
+
+		if (!dateText.isEmpty()) {
+			try {
+				dueDate = LocalDate.parse(dateText);
+
+				if (dueDate.isBefore(LocalDate.now())) {
+					throw new IllegalDateException("The date can't be in the past.");
+				}
+			} catch (DateTimeParseException e) {
+				throw new IllegalDateException("Date format invalid. Must be yyyy-MM-dd.");
+			}
+		}
+
 		return dueDate;
 	}
 }

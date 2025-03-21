@@ -95,10 +95,10 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		}else if(e.getSource()==btnDelete) {
 			if (comboBox.getSelectedIndex() != -1) {
 				Task selectedTask = (Task) comboBox.getSelectedItem();
-				
+
 				if (!cont.removeTask(selectedTask)) {
 					JOptionPane.showMessageDialog(this, "The task is deleted succesfully", "Deleted", JOptionPane.INFORMATION_MESSAGE);
-					
+
 					DefaultComboBoxModel<Task> model = new DefaultComboBoxModel<>(cont.getTasks(client).toArray(new Task[0]));
 					comboBox.setModel(model);
 					comboBox.setSelectedIndex(-1);
@@ -111,4 +111,3 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		}
 	}
 }
-

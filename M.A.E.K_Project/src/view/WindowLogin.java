@@ -35,7 +35,7 @@ public class WindowLogin extends JFrame implements ActionListener{
 	private JLabel lblUsername;
 	private JLabel lblPassword;
 	private Client client;
-	
+
 	public WindowLogin(Controller cont) {
 		this.cont = cont;
 		setTitle("M.A.E.K.");
@@ -50,7 +50,7 @@ public class WindowLogin extends JFrame implements ActionListener{
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		btnSignUp = new JButton("Become a member");
 		btnSignUp.setForeground(new Color(33, 37, 41));
 		btnSignUp.setBorder(new LineBorder(new Color(33, 37, 41), 5));
@@ -59,7 +59,7 @@ public class WindowLogin extends JFrame implements ActionListener{
 		btnSignUp.setBounds(46, 400, 659, 45);
 		btnSignUp.addActionListener(this);
 		contentPane.add(btnSignUp);
-		
+
 		btnLogIn = new JButton("Sign In");
 		btnLogIn.setForeground(new Color(222, 226, 230));
 		btnLogIn.setFont(new Font("Source Code Pro", Font.PLAIN, 36));
@@ -67,26 +67,26 @@ public class WindowLogin extends JFrame implements ActionListener{
 		btnLogIn.setBackground(new Color(33, 37, 41));
 		btnLogIn.setBounds(46, 327, 659, 45);
 		btnLogIn.addActionListener(this);
-		
+
 		contentPane.add(btnLogIn);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setBorder(null);
 		passwordField.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		passwordField.setBackground(new Color(173, 181, 189));
 		passwordField.setBounds(46, 240, 659, 40);
 		contentPane.add(passwordField);
-		
+
 		lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblPassword.setBounds(46, 206, 131, 34);
 		contentPane.add(lblPassword);
-		
+
 		lblUsername = new JLabel("Username");
 		lblUsername.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblUsername.setBounds(47, 120, 131, 34);
 		contentPane.add(lblUsername);
-		
+
 		textField = new JTextField();
 		textField.setBorder(null);
 		textField.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
@@ -94,7 +94,7 @@ public class WindowLogin extends JFrame implements ActionListener{
 		textField.setBounds(46, 150, 659, 40);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
+
 		lblWelcome = new JLabel("Welcome");
 		lblWelcome.setForeground(new Color(33, 37, 41));
 		lblWelcome.setFont(new Font("Source Code Pro", Font.PLAIN, 72));
