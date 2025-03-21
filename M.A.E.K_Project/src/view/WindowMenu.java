@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -22,10 +24,11 @@ import controller.Controller;
 import model.Client;
 import model.Task;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 
 public class WindowMenu extends JFrame implements ActionListener {
@@ -148,6 +151,13 @@ public class WindowMenu extends JFrame implements ActionListener {
         btnNextMonth.addActionListener(this);
         btnPrevYear.addActionListener(this);
         btnNextYear.addActionListener(this);
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                checkTasks();
+            }
+        });
 	}
 
 	@Override
@@ -233,10 +243,13 @@ public class WindowMenu extends JFrame implements ActionListener {
         lblYear.setText(String.valueOf(currentYear));
     }
 	
-	public void calendarColors() {
-		ArrayList<Task> tasks = cont.getTasks(client);
-		
-		
+	public void checkTasks() {
+		for (Task task : cont.getTasks(client)) {
+			if (ChronoUnit.DAYS.between(LocalDate.now(), task.getDue_date()) < 3) {
+				JOptionPane.showMessageDialog(this, "Check your tasks because only left 3 days or minus", "Warning", JOptionPane.WARNING_MESSAGE);
+				break;
+			}
+		}
 	}
 }
 
