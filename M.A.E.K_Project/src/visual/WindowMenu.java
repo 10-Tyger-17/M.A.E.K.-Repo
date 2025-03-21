@@ -27,6 +27,7 @@ import java.util.Calendar;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+
 public class WindowMenu extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -174,7 +175,7 @@ public class WindowMenu extends JFrame implements ActionListener {
             currentYear++;
             createCalendar();
         } else if (e.getSource() == btnShowTasks) {
-			WindowShowTasks windowShowTasks = new WindowShowTasks(this, client, cont);
+        	WindowShowTasks windowShowTasks = new WindowShowTasks(this, client, cont);
 			windowShowTasks.setVisible(true);
 		} else if (e.getSource() == btnAddTask) {
 			WindowAddTask windowAddTask = new WindowAddTask(this, client, cont);
