@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -11,13 +10,20 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.Controller;
+import exceptions.IllegalDateException;
 import model.Client;
+import model.Task;
+import model.Task_state_Enum;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -41,10 +47,12 @@ public class WindowAddTask extends JDialog implements ActionListener {
 	private JButton btnAdd;
 	private ButtonGroup btnGroupPC;
 	private Controller cont;
+	private Client client;
 
 	public WindowAddTask(JFrame parent, Client client, Controller cont) {
 		super(parent, true);
 		this.cont = cont;
+		this.client = client;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowAddTask.class.getResource("/visual/Assets/Logo.jpg")));
 		setBounds(100, 100, 464, 532);
 		getContentPane().setLayout(new BorderLayout());
@@ -79,7 +87,7 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		contentPanel.add(textFieldDescription);
 		textFieldDescription.setColumns(10);
 
-		lblDueDate = new JLabel("Due date");
+		lblDueDate = new JLabel("Due date (yyyy-MM-dd)");
 		lblDueDate.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblDueDate.setBounds(29, 251, 121, 34);
 		contentPanel.add(lblDueDate);
@@ -88,6 +96,7 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		rdbtnPending.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		rdbtnPending.setBounds(45, 336, 130, 34);
 		contentPanel.add(rdbtnPending);
+		rdbtnPending.setSelected(true);
 
 		rdbtnCompleted = new JRadioButton("Completed");
 		rdbtnCompleted.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
@@ -120,11 +129,33 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		btnAdd.setBounds(28, 425, 391, 45);
 		btnAdd.addActionListener(this);
 		contentPanel.add(btnAdd);
-
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		if (e.getSource() == btnAdd) {
+			try {
+				checkDate();
+			} catch (IllegalDateException e1) {
+				JOptionPane.showMessageDialog(this, "There is a problem with the date\n" + e1.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
+			}
+		}
 	}
+	
+	public void checkDate() throws IllegalDateException {
+	    Task_state_Enum state = rdbtnPending.isSelected() ? Task_state_Enum.PENDING : Task_state_Enum.COMPLETED;
+
+	    try {
+	        LocalDate dueDate = LocalDate.parse(textFieldDueDate.getText());
+	        
+	        if (dueDate.isBefore(LocalDate.now())) {
+	            throw new IllegalDateException("The date cant be in the past");
+	        }
+	        
+	        cont.setTask(new Task(0, textFieldName.getText(), textFieldDescription.getText(), dueDate, state, client.getUsername(), textFieldCategory.getText()));
+	    } catch (DateTimeParseException e) {
+	        throw new IllegalDateException("Date format invalid. Must be yyyy-MM-dd.");
+	    }
+	}
+
 }

@@ -25,10 +25,12 @@ public class ImplementDB implements ModelDAO {
 	final String SQLSIGNUP = "CALL SIGNUP(?,?,?,?);";
 	final String SQLCATEGORIES = "SELECT * FROM category WHERE category_name = (SELECT category_name FROM task WHERE username = ?);";
 	final String SQLTASKS = "SELECT * FROM task WHERE username = ?;";
-	final String SQLSETTASK = "INSERT INTO task (task_name, task_description, due_date, task_state, username, category_id) VALUES (?, ?, ?, ?, ?, ?);";
+	final String SQLSETTASK = "INSERT INTO task (task_name, task_description, due_date, task_state, username, category_name) VALUES (?, ?, ?, ?, ?, ?);";
 	final String SQLREMOVETASK = "DELETE FROM task WHERE id = ?;";
 	final String SQLMODIFYTASK = "UPDATE task SET task_description = ? WHERE id = ?;";
 	final String SQLSTATETASK = "UPDATE task SET task_state = ? WHERE id = ?;";
+	final String SQLALLCATEGORIES = "SELECT * FROM category;";
+	final String SQLSETCATEGORY = "INSERT INTO category VALUES (?, ?);";
 	
 	public ImplementDB() {
 		this.configFile = ResourceBundle.getBundle("configs.configClase");
@@ -164,32 +166,47 @@ public class ImplementDB implements ModelDAO {
 	
 	@Override
 	public boolean setTask(Task task) {
-		boolean error = false;
-		
-		this.openConnection();
-		
-		try {
-			stmt = con.prepareStatement(SQLSETTASK);
-			stmt.setString(1, task.getTask_name());
-			stmt.setString(2, task.getTask_description());
-			stmt.setDate(3, Date.valueOf(task.getDue_date()));
-			stmt.setString(4, task.getTask_state().value());
-			stmt.setString(5, task.getUsername());
-			stmt.setString(6, task.getCategory());
-			
-			if (stmt.executeUpdate() == 0) {
-				error = true;
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("Error setTask: " + e.getMessage());
-			error = true;
-		} finally {
-			this.closeConnection();
-		}
-		
-		return error;
+	    boolean error = false;
+	    
+	    this.openConnection();
+	    
+	    try {
+	        stmt = con.prepareStatement("SELECT * FROM Categories WHERE category_name = ?");
+	        stmt.setString(1, task.getCategory());
+	        ResultSet result = stmt.executeQuery();
+	        
+	        if (!result.next()) {
+	            stmt = con.prepareStatement(SQLSETCATEGORY);
+	            stmt.setString(1, task.getCategory());
+	            stmt.setString(2, task.getCategory());
+	            
+	            if (stmt.executeUpdate() == 0) {
+	                error = true;
+	            }
+	        }
+	        
+	        stmt = con.prepareStatement(SQLSETTASK);
+	        stmt.setString(1, task.getTask_name());
+	        stmt.setString(2, task.getTask_description());
+	        stmt.setDate(3, Date.valueOf(task.getDue_date()));
+	        stmt.setString(4, task.getTask_state().value());
+	        stmt.setString(5, task.getUsername());
+	        stmt.setString(6, task.getCategory());
+	        
+	        if (stmt.executeUpdate() == 0) {
+	            error = true;
+	        }
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Error setTask: " + e.getMessage());
+	        error = true;
+	    } finally {
+	        this.closeConnection();
+	    }
+	    
+	    return error;
 	}
+
 
 	@Override
 	public boolean removeTask(Task task) {
