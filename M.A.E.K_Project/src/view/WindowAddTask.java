@@ -48,6 +48,7 @@ public class WindowAddTask extends JDialog implements ActionListener {
 	private ButtonGroup btnGroupPC;
 	private Controller cont;
 	private Client client;
+	private JButton btnExit;
 
 	public WindowAddTask(JFrame parent, Client client, Controller cont) {
 		super(parent, true);
@@ -67,23 +68,23 @@ public class WindowAddTask extends JDialog implements ActionListener {
 
 		textFieldName = new JTextField();
 		textFieldName.setBackground(new Color(173, 181, 189));
-		textFieldName.setBounds(28, 124, 391, 39);
+		textFieldName.setBounds(28, 122, 391, 39);
 		contentPanel.add(textFieldName);
 		textFieldName.setColumns(10);
 
 		lblName = new JLabel("Name");
 		lblName.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
-		lblName.setBounds(29, 93, 74, 34);
+		lblName.setBounds(29, 91, 74, 34);
 		contentPanel.add(lblName);
 
 		lblDescription = new JLabel("Description");
 		lblDescription.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
-		lblDescription.setBounds(28, 172, 168, 34);
+		lblDescription.setBounds(27, 170, 168, 34);
 		contentPanel.add(lblDescription);
 
 		textFieldDescription = new JTextField();
 		textFieldDescription.setBackground(new Color(173, 181, 189));
-		textFieldDescription.setBounds(29, 203, 391, 39);
+		textFieldDescription.setBounds(28, 201, 391, 39);
 		contentPanel.add(textFieldDescription);
 		textFieldDescription.setColumns(10);
 
@@ -94,13 +95,13 @@ public class WindowAddTask extends JDialog implements ActionListener {
 
 		rdbtnPending = new JRadioButton("Pending");
 		rdbtnPending.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
-		rdbtnPending.setBounds(45, 336, 130, 34);
+		rdbtnPending.setBounds(28, 335, 130, 34);
 		contentPanel.add(rdbtnPending);
 		rdbtnPending.setSelected(true);
 
 		rdbtnCompleted = new JRadioButton("Completed");
 		rdbtnCompleted.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
-		rdbtnCompleted.setBounds(45, 370, 157, 34);
+		rdbtnCompleted.setBounds(28, 369, 157, 34);
 		contentPanel.add(rdbtnCompleted);
 		btnGroupPC = new ButtonGroup();
 		btnGroupPC.add(rdbtnPending);
@@ -108,12 +109,12 @@ public class WindowAddTask extends JDialog implements ActionListener {
 
 		lblCategory = new JLabel("Category");
 		lblCategory.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
-		lblCategory.setBounds(255, 331, 157, 34);
+		lblCategory.setBounds(254, 330, 157, 34);
 		contentPanel.add(lblCategory);
 
 		textFieldCategory = new JTextField();
 		textFieldCategory.setBackground(new Color(173, 181, 189));
-		textFieldCategory.setBounds(255, 365, 165, 39);
+		textFieldCategory.setBounds(254, 364, 165, 39);
 		contentPanel.add(textFieldCategory);
 		textFieldCategory.setColumns(10);
 
@@ -124,11 +125,20 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		textFieldDueDate.setColumns(10);
 
 		btnAdd = new JButton("Add");
+		btnAdd.setFont(new Font("Source Code Pro", Font.PLAIN, 36));
 		btnAdd.setBackground(new Color(33, 37, 41));
 		btnAdd.setForeground(new Color(255, 255, 255));
-		btnAdd.setBounds(28, 425, 391, 45);
+		btnAdd.setBounds(28, 414, 391, 45);
 		btnAdd.addActionListener(this);
 		contentPanel.add(btnAdd);
+		
+		btnExit = new JButton("Exit");
+		btnExit.setForeground(Color.WHITE);
+		btnExit.setBorder(null);
+		btnExit.setBackground(new Color(33, 37, 41));
+		btnExit.setBounds(336, 466, 112, 27);
+		contentPanel.add(btnExit);
+		btnExit.addActionListener(this);
 	}
 
 	@Override
@@ -138,12 +148,14 @@ public class WindowAddTask extends JDialog implements ActionListener {
 				checkDate();
 				JOptionPane.showMessageDialog(this, "The task " + textFieldName.getText() + " is added succesfully", "Completed", JOptionPane.INFORMATION_MESSAGE);
 				textFieldName.setText("");
-				lblDescription.setText("");
+				textFieldDescription.setText("");
 				textFieldCategory.setText("");
 				textFieldDueDate.setText("");
 			} catch (IllegalDateException e1) {
 				JOptionPane.showMessageDialog(this, "There is a problem with the date\n" + e1.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
 			}
+		} else if (e.getSource() == btnExit) {
+			dispose();
 		}
 	}
 	
@@ -162,5 +174,4 @@ public class WindowAddTask extends JDialog implements ActionListener {
 	        throw new IllegalDateException("Date format invalid. Must be yyyy-MM-dd.");
 	    }
 	}
-
 }

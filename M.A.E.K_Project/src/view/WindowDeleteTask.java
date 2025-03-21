@@ -15,6 +15,7 @@ import model.Client;
 import model.Task;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -91,12 +92,16 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		}else if(e.getSource()==btnDelete) {
 			if (comboBox.getSelectedIndex() != -1) {
 				Task selectedTask = (Task) comboBox.getSelectedItem();
+				
+				JOptionPane.showMessageDialog(this, "The task is deleted succesfully", "Deleted", JOptionPane.INFORMATION_MESSAGE);
 				cont.removeTask(selectedTask);
 				
 				 DefaultComboBoxModel<Task> model = new DefaultComboBoxModel<>(cont.getTasks(client).toArray(new Task[0]));
 		         comboBox.setModel(model);
 				
 				comboBox.setSelectedIndex(-1);
+			} else {
+				JOptionPane.showMessageDialog(this, "Select a valid task", "Warning", JOptionPane.WARNING_MESSAGE);
 			}
 		}
 	}
