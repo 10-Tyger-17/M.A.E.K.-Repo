@@ -3,6 +3,7 @@ package view;
 
 import java.awt.BorderLayout;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -18,12 +19,9 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JComboBox;
-import javax.swing.JCheckBox;
 import java.awt.Color;
-import javax.swing.JTextField;
 
 public class WindowDeleteTask extends JDialog implements ActionListener{
 	private static final long serialVersionUID = 1L;
@@ -53,13 +51,7 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		lblDeleteTask.setFont(new Font("Source Code Pro", Font.PLAIN, 72));
 		lblDeleteTask.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblDeleteTask);
-		
-		
-		
-		
-	
 
-		
 		lblTaskToBeDelete = new JLabel("Task to be deleted");
 		lblTaskToBeDelete.setBounds(26, 161, 264, 34);
 		lblTaskToBeDelete.setHorizontalAlignment(SwingConstants.LEFT);
@@ -82,21 +74,13 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		btnDelete.setFont(new Font("Source Code Pro", Font.PLAIN, 36));
 		btnDelete.addActionListener(this);
 		contentPanel.add(btnDelete);
-		
-		
+
+
 		comboBox = new JComboBox<Task>();
 		comboBox.setBounds(75, 206, 384, 22);
+		comboBox.setModel(new DefaultComboBoxModel<>(cont.getTasks(client).toArray(new Task[0])));
 		contentPanel.add(comboBox);
 		comboBox.setSelectedIndex(-1);
-		uploadTask(client);
-	}
-	
-	public void uploadTask(Client client) {
-		ArrayList<Task> tasks = cont.getTasks(client);
-		comboBox.removeAll();
-		for(int i=0;i<tasks.size();i++) {
-		comboBox.addItem(tasks.get(i));
-		}
 	}
 
 
@@ -105,15 +89,16 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		if(e.getSource()== btnExit) {
 			this.dispose();
 		}else if(e.getSource()==btnDelete) {
-			if(comboBox.getItemCount()!=0) {
-			cont.removeTask((Task)comboBox.getSelectedItem());
-			
+			if (comboBox.getSelectedIndex() != -1) {
+				Task selectedTask = (Task) comboBox.getSelectedItem();
+				cont.removeTask(selectedTask);
+				
+				 DefaultComboBoxModel<Task> model = new DefaultComboBoxModel<>(cont.getTasks(client).toArray(new Task[0]));
+		         comboBox.setModel(model);
+				
+				comboBox.setSelectedIndex(-1);
 			}
-			uploadTask(client);
 		}
-
-
-
 	}
 }
 
