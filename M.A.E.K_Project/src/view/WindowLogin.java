@@ -41,7 +41,7 @@ public class WindowLogin extends JFrame implements ActionListener{
 		setTitle("M.A.E.K.");
 		setBackground(new Color(173, 181, 189));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowLogin.class.getResource("/visual/Assets/Logo.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowLogin.class.getResource("/view/Assets/Logo.jpg")));
 		setResizable(false);
 		setBounds(100, 100, 800, 530);
 		contentPane = new JPanel();

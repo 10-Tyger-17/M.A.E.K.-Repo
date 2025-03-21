@@ -44,7 +44,7 @@ public class WindowSignUp extends JDialog implements ActionListener{
 		super(parent,true);
 		this.cont=cont;
 		setTitle("M.A.E.K.");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowSignUp.class.getResource("/visual/Assets/Logo.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowSignUp.class.getResource("/view/Assets/Logo.jpg")));
 		setBounds(100, 100, 464, 532);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

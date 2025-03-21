@@ -60,7 +60,7 @@ public class WindowMenu extends JFrame implements ActionListener {
 		setTitle("M.A.E.K.");
 		getContentPane().setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowLogin.class.getResource("/visual/Assets/Logo.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowLogin.class.getResource("/view/Assets/Logo.jpg")));
 		contentPanel.setBackground(new Color(248, 249, 250));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

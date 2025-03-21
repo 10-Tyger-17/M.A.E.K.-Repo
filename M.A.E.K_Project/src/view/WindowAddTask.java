@@ -54,7 +54,7 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		super(parent, true);
 		this.cont = cont;
 		this.client = client;
-		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowAddTask.class.getResource("/visual/Assets/Logo.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowAddTask.class.getResource("/view/Assets/Logo.jpg")));
 		setBounds(100, 100, 464, 532);
 		setTitle("M.A.E.K.");
 		getContentPane().setLayout(new BorderLayout());
