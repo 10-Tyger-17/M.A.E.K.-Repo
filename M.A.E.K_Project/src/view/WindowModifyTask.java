@@ -173,7 +173,7 @@ public class WindowModifyTask extends JDialog implements ActionListener {
 					Task_state_Enum state = rdbtnPending.isSelected() ? Task_state_Enum.PENDING : Task_state_Enum.COMPLETED;
 
 					if (!cont.modifyTask(new Task(task.getId(), name, description, dueDate, state, task.getUsername(), category))) {
-						JOptionPane.showMessageDialog(this, "The task " + textFieldName.getText() + " is modify succesfully", "Completed", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(this, "The task has been modified successfully", "Completed", JOptionPane.INFORMATION_MESSAGE);
 						textFieldName.setText("");
 						textFieldDescription.setText("");
 						textFieldCategory.setText("");

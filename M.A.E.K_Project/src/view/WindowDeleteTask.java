@@ -97,7 +97,7 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 				Task selectedTask = (Task) comboBox.getSelectedItem();
 
 				if (!cont.removeTask(selectedTask)) {
-					JOptionPane.showMessageDialog(this, "The task is deleted succesfully", "Deleted", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(this, "The task has been deleted successfully", "Deleted", JOptionPane.INFORMATION_MESSAGE);
 
 					DefaultComboBoxModel<Task> model = new DefaultComboBoxModel<>(cont.getTasks(client).toArray(new Task[0]));
 					comboBox.setModel(model);

@@ -244,17 +244,25 @@ public class ImplementDB implements ModelDAO {
 	            sql.append("task_name = ?, ");
 	            params.add(task.getTask_name());
 	        }
+	        
 	        if (task.getTask_description() != null && !task.getTask_description().isEmpty()) {
 	            sql.append("task_description = ?, ");
 	            params.add(task.getTask_description());
 	        }
+	        
 	        if (task.getTask_state() != null) {
 	            sql.append("task_state = ?, ");
 	            params.add(task.getTask_state().value());
 	        }
+	        
 	        if (task.getCategory() != null && !task.getCategory().isEmpty()) {
 	            sql.append("category_name = ?, ");
 	            params.add(task.getCategory());
+	        }
+	        
+	        if (task.getDue_date() != null && !String.valueOf(task.getDue_date()).isEmpty()) {
+	            sql.append("due_date = ?, ");
+	            params.add(task.getDue_date());
 	        }
 
 	        if (!params.isEmpty()) {

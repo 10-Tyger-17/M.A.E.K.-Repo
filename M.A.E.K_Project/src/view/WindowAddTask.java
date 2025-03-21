@@ -154,7 +154,7 @@ public class WindowAddTask extends JDialog implements ActionListener {
 				Task_state_Enum state = rdbtnPending.isSelected() ? Task_state_Enum.PENDING : Task_state_Enum.COMPLETED;
 
 				if (!cont.setTask(new Task(0, textFieldName.getText(), textFieldDescription.getText(), dueDate, state, client.getUsername(), textFieldCategory.getText()))) {
-					JOptionPane.showMessageDialog(this, "The task " + textFieldName.getText() + " is added succesfully", "Completed", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(this, "The task has been added successfully", "Completed", JOptionPane.INFORMATION_MESSAGE);
 					textFieldName.setText("");
 					textFieldDescription.setText("");
 					textFieldCategory.setText("");
