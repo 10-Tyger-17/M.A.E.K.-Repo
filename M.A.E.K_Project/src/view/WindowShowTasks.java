@@ -112,55 +112,62 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 		btnExit.setBounds(422, 468, 112, 25);
 		btnExit.addActionListener(this);
 		contentPanel.add(btnExit);
-		
+
 		comboBox = new JComboBox<>();
 		ArrayList<Category> categories = cont.getCategories(client);
 		String[] categoryNames = new String[categories.size() + 1];
 		categoryNames[0] = "";
 		for (int i = 0; i < categories.size(); i++) {
-		    categoryNames[i + 1] = categories.get(i).getCategory_name();
+			categoryNames[i + 1] = categories.get(i).getCategory_name();
 		}
 		comboBox.setModel(new DefaultComboBoxModel<>(categoryNames));
-        comboBox.setSelectedIndex(0);
+		comboBox.setSelectedIndex(0);
 		comboBox.setFont(new Font("Source Code Pro", Font.PLAIN, 16));
 		comboBox.setBounds(298, 398, 142, 25);
 		contentPanel.add(comboBox);
 		comboBox.addActionListener(this);
-		
-		actualizarTabla(true, true, null);
+
+		updateTable(true, true, null);
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	    if (e.getSource() == btnExit) {
-	        dispose();
-	    } else if (e.getSource() == chckbxPending || e.getSource() == chckbxCompleted) {
-	        actualizarTabla(chckbxCompleted.isSelected(), chckbxPending.isSelected(), null);
-	    } else if (e.getSource() == comboBox) {
-	        String selectedCategory = String.valueOf(comboBox.getSelectedItem());
-	        if (selectedCategory.isEmpty()) {
-	            selectedCategory = null;
-	        }
-	        
-	        actualizarTabla(true, true, selectedCategory);
-	    }
+		String selectedCategory = String.valueOf(comboBox.getSelectedItem());
+		if (e.getSource() == btnExit) {
+			dispose();
+		} else if (e.getSource() == chckbxPending || e.getSource() == chckbxCompleted || e.getSource() == comboBox) {
+			updateTable(chckbxCompleted.isSelected(), chckbxPending.isSelected(), selectedCategory);
+		}
 	}
 
-	private void actualizarTabla(boolean completed, boolean pending, String category) {
-	    ArrayList<Task> tasks = cont.getTasks(client);
-	    
-	    model.setRowCount(0);
+	private void updateTable(boolean completed, boolean pending, String category) {
+		ArrayList<Task> tasks = cont.getTasks(client);
 
-	    for (Task task : tasks) {
-	    	model.addRow(new Object[]{
-	                task.getTask_name(),
-	                task.getTask_description(),
-	                task.getDue_date(),
-	                task.getTask_state(),
-	                task.getCategory()
-	            });
-	    }
+		model.setRowCount(0);
+
+		for (Task task : tasks) {
+			boolean matchState = false;
+
+			if (!chckbxPending.isSelected() && !chckbxCompleted.isSelected()) {
+				matchState = true;
+			} else if (chckbxPending.isSelected() && task.getTask_state() == Task_state_Enum.PENDING) {
+				matchState = true;
+			} else if (chckbxCompleted.isSelected() && task.getTask_state() == Task_state_Enum.COMPLETED) {
+				matchState = true;
+			}
+
+			boolean matchCategory = (category == null || category.isEmpty() || task.getCategory().equals(category));
+
+			if (matchState && matchCategory) {
+				model.addRow(new Object[]{
+						task.getTask_name(),
+						task.getTask_description(),
+						task.getDue_date(),
+						task.getTask_state().value(),
+						task.getCategory()
+				});
+			}
+		}
 	}
-
 }
