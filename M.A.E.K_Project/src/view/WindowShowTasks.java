@@ -46,9 +46,11 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 	private JComboBox<String> comboBox;
 
 	public WindowShowTasks(JFrame parent, Client client, Controller cont) {
+		super(parent, true);
 		this.cont = cont;
 		this.client = client;
 		setBounds(100, 100, 550, 532);
+		setTitle("M.A.E.K.");
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -70,7 +72,7 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 
 		table = new JTable();
 		table.setFont(new Font("Source Code Pro", Font.PLAIN, 15));
-		model = new DefaultTableModel(new String[]{"ID", "Name", "Description", "Due date", "State", "Category"}, 0);
+		model = new DefaultTableModel(new String[]{"Name", "Description", "Due date", "State", "Category"}, 0);
 		table = new JTable(model) {
 			private static final long serialVersionUID = 1L;
 
@@ -79,12 +81,11 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 			};
 		};
 		table.setRowHeight(20);
-		table.getColumnModel().getColumn(0).setPreferredWidth(10);
-		table.getColumnModel().getColumn(1).setPreferredWidth(60);
-		table.getColumnModel().getColumn(2).setPreferredWidth(120);
-		table.getColumnModel().getColumn(3).setPreferredWidth(35);
-		table.getColumnModel().getColumn(4).setPreferredWidth(35);
-		table.getColumnModel().getColumn(5).setPreferredWidth(35);
+		table.getColumnModel().getColumn(0).setPreferredWidth(60);
+		table.getColumnModel().getColumn(1).setPreferredWidth(120);
+		table.getColumnModel().getColumn(2).setPreferredWidth(35);
+		table.getColumnModel().getColumn(3).setPreferredWidth(42);
+		table.getColumnModel().getColumn(4).setPreferredWidth(32);
 		scrollPane.setViewportView(table);
 
 		chckbxPending = new JCheckBox("Pending");
@@ -114,12 +115,13 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 		
 		comboBox = new JComboBox<>();
 		ArrayList<Category> categories = cont.getCategories(client);
-		String[] categoryNames = new String[categories.size()];
+		String[] categoryNames = new String[categories.size() + 1];
+		categoryNames[0] = "";
 		for (int i = 0; i < categories.size(); i++) {
-		    categoryNames[i] = categories.get(i).getCategory_name();
+		    categoryNames[i + 1] = categories.get(i).getCategory_name();
 		}
 		comboBox.setModel(new DefaultComboBoxModel<>(categoryNames));
-        comboBox.setSelectedIndex(-1);
+        comboBox.setSelectedIndex(0);
 		comboBox.setFont(new Font("Source Code Pro", Font.PLAIN, 16));
 		comboBox.setBounds(298, 398, 142, 25);
 		contentPanel.add(comboBox);
@@ -136,38 +138,28 @@ public class WindowShowTasks extends JDialog implements ActionListener{
 	    } else if (e.getSource() == chckbxPending || e.getSource() == chckbxCompleted) {
 	        actualizarTabla(chckbxCompleted.isSelected(), chckbxPending.isSelected(), null);
 	    } else if (e.getSource() == comboBox) {
-	        actualizarTabla(true, true, String.valueOf(comboBox.getSelectedItem()));
+	        String selectedCategory = String.valueOf(comboBox.getSelectedItem());
+	        if (selectedCategory.isEmpty()) {
+	            selectedCategory = null;
+	        }
+	        
+	        actualizarTabla(true, true, selectedCategory);
 	    }
 	}
 
 	private void actualizarTabla(boolean completed, boolean pending, String category) {
 	    ArrayList<Task> tasks = cont.getTasks(client);
-	    boolean isCategoryMatch = false;;
-        boolean isStateMatch = false;
-        
+	    
 	    model.setRowCount(0);
 
 	    for (Task task : tasks) {
-	    	isCategoryMatch = category == null || category.equalsIgnoreCase(task.getCategory());
-	    	
-	        if (!completed && !pending) {
-	            isStateMatch = true;
-	        } else {
-	            isStateMatch = (completed && task.getTask_state().equals(Task_state_Enum.COMPLETED)) || (pending && task.getTask_state().equals(Task_state_Enum.PENDING));
-	        }
-
-	        if (isCategoryMatch && isStateMatch) {
-	            String[] rowData = {
-	                String.valueOf(task.getId()),
+	    	model.addRow(new Object[]{
 	                task.getTask_name(),
 	                task.getTask_description(),
-	                String.valueOf(task.getDue_date()),
-	                String.valueOf(task.getTask_state().value()),
+	                task.getDue_date(),
+	                task.getTask_state(),
 	                task.getCategory()
-	            };
-	            
-	            model.addRow(rowData);
-	        }
+	            });
 	    }
 	}
 

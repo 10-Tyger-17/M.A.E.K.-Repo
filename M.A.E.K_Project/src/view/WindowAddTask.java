@@ -56,6 +56,7 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		this.client = client;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowAddTask.class.getResource("/visual/Assets/Logo.jpg")));
 		setBounds(100, 100, 464, 532);
+		setTitle("M.A.E.K.");
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -67,6 +68,7 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		contentPanel.add(lblAddTask);
 
 		textFieldName = new JTextField();
+		textFieldName.setFont(new Font("Source Code Pro", Font.PLAIN, 18));
 		textFieldName.setBackground(new Color(173, 181, 189));
 		textFieldName.setBounds(28, 122, 391, 39);
 		contentPanel.add(textFieldName);
@@ -83,6 +85,7 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		contentPanel.add(lblDescription);
 
 		textFieldDescription = new JTextField();
+		textFieldDescription.setFont(new Font("Source Code Pro", Font.PLAIN, 18));
 		textFieldDescription.setBackground(new Color(173, 181, 189));
 		textFieldDescription.setBounds(28, 201, 391, 39);
 		contentPanel.add(textFieldDescription);
@@ -113,12 +116,14 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		contentPanel.add(lblCategory);
 
 		textFieldCategory = new JTextField();
+		textFieldCategory.setFont(new Font("Source Code Pro", Font.PLAIN, 18));
 		textFieldCategory.setBackground(new Color(173, 181, 189));
 		textFieldCategory.setBounds(254, 364, 165, 39);
 		contentPanel.add(textFieldCategory);
 		textFieldCategory.setColumns(10);
 
 		textFieldDueDate = new JTextField();
+		textFieldDueDate.setFont(new Font("Source Code Pro", Font.PLAIN, 18));
 		textFieldDueDate.setBackground(new Color(173, 181, 189));
 		textFieldDueDate.setBounds(28, 282, 391, 39);
 		contentPanel.add(textFieldDueDate);
@@ -145,12 +150,19 @@ public class WindowAddTask extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAdd) {
 			try {
-				checkDate();
-				JOptionPane.showMessageDialog(this, "The task " + textFieldName.getText() + " is added succesfully", "Completed", JOptionPane.INFORMATION_MESSAGE);
-				textFieldName.setText("");
-				textFieldDescription.setText("");
-				textFieldCategory.setText("");
-				textFieldDueDate.setText("");
+				LocalDate dueDate = checkDate();
+                Task_state_Enum state = rdbtnPending.isSelected() ? Task_state_Enum.PENDING : Task_state_Enum.COMPLETED;
+                
+                if (!cont.setTask(new Task(0, textFieldName.getText(), textFieldDescription.getText(), dueDate, state, client.getUsername(), textFieldCategory.getText()))) {
+                	JOptionPane.showMessageDialog(this, "The task " + textFieldName.getText() + " is added succesfully", "Completed", JOptionPane.INFORMATION_MESSAGE);
+    				textFieldName.setText("");
+    				textFieldDescription.setText("");
+    				textFieldCategory.setText("");
+    				textFieldDueDate.setText("");
+    				rdbtnPending.setSelected(true);
+                } else {
+                	JOptionPane.showMessageDialog(this, "An error has ocurred adding the task", "Error", JOptionPane.ERROR_MESSAGE);
+                }
 			} catch (IllegalDateException e1) {
 				JOptionPane.showMessageDialog(this, "There is a problem with the date\n" + e1.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
 			}
@@ -159,19 +171,22 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		}
 	}
 	
-	public void checkDate() throws IllegalDateException {
-	    Task_state_Enum state = rdbtnPending.isSelected() ? Task_state_Enum.PENDING : Task_state_Enum.COMPLETED;
+	public LocalDate checkDate() throws IllegalDateException {
+	    String dateText = textFieldDueDate.getText();
+	    LocalDate dueDate = null;
 
-	    try {
-	        LocalDate dueDate = LocalDate.parse(textFieldDueDate.getText());
-	        
-	        if (dueDate.isBefore(LocalDate.now())) {
-	            throw new IllegalDateException("The date cant be in the past");
-	        }
-	        
-	        cont.setTask(new Task(0, textFieldName.getText(), textFieldDescription.getText(), dueDate, state, client.getUsername(), textFieldCategory.getText()));
-	    } catch (DateTimeParseException e) {
-	        throw new IllegalDateException("Date format invalid. Must be yyyy-MM-dd.");
+	    if (!dateText.isEmpty()) {
+	    	try {
+		        dueDate = LocalDate.parse(dateText);
+		        
+		        if (dueDate.isBefore(LocalDate.now())) {
+		            throw new IllegalDateException("The date can't be in the past.");
+		        }
+		    } catch (DateTimeParseException e) {
+		        throw new IllegalDateException("Date format invalid. Must be yyyy-MM-dd.");
+		    }
 	    }
+	    
+		return dueDate;
 	}
 }

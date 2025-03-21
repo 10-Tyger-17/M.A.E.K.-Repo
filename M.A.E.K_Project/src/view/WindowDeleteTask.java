@@ -41,6 +41,7 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		this.cont = cont;
 		this.client=client;
 		setBounds(100, 100, 542, 472);
+		setTitle("M.A.E.K.");
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(248, 249, 250));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -54,7 +55,7 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 		contentPanel.add(lblDeleteTask);
 
 		lblTaskToBeDelete = new JLabel("Task to be deleted");
-		lblTaskToBeDelete.setBounds(26, 161, 264, 34);
+		lblTaskToBeDelete.setBounds(36, 161, 264, 34);
 		lblTaskToBeDelete.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTaskToBeDelete.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		contentPanel.add(lblTaskToBeDelete);
@@ -78,8 +79,10 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 
 
 		comboBox = new JComboBox<Task>();
-		comboBox.setBounds(75, 206, 384, 22);
+		comboBox.setFont(new Font("Source Code Pro", Font.PLAIN, 12));
+		comboBox.setBounds(36, 206, 460, 29);
 		comboBox.setModel(new DefaultComboBoxModel<>(cont.getTasks(client).toArray(new Task[0])));
+		comboBox.setBackground(new Color(173, 181, 189));
 		contentPanel.add(comboBox);
 		comboBox.setSelectedIndex(-1);
 	}
@@ -93,13 +96,15 @@ public class WindowDeleteTask extends JDialog implements ActionListener{
 			if (comboBox.getSelectedIndex() != -1) {
 				Task selectedTask = (Task) comboBox.getSelectedItem();
 				
-				JOptionPane.showMessageDialog(this, "The task is deleted succesfully", "Deleted", JOptionPane.INFORMATION_MESSAGE);
-				cont.removeTask(selectedTask);
-				
-				 DefaultComboBoxModel<Task> model = new DefaultComboBoxModel<>(cont.getTasks(client).toArray(new Task[0]));
-		         comboBox.setModel(model);
-				
-				comboBox.setSelectedIndex(-1);
+				if (!cont.removeTask(selectedTask)) {
+					JOptionPane.showMessageDialog(this, "The task is deleted succesfully", "Deleted", JOptionPane.INFORMATION_MESSAGE);
+					
+					DefaultComboBoxModel<Task> model = new DefaultComboBoxModel<>(cont.getTasks(client).toArray(new Task[0]));
+					comboBox.setModel(model);
+					comboBox.setSelectedIndex(-1);
+				} else {
+					JOptionPane.showMessageDialog(this, "An error has ocurred deleting the task", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			} else {
 				JOptionPane.showMessageDialog(this, "Select a valid task", "Warning", JOptionPane.WARNING_MESSAGE);
 			}

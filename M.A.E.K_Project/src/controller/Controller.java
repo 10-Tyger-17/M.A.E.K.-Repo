@@ -38,6 +38,7 @@ public class Controller {
 	public boolean modifyTask(Task task){
 		return dao.modifyTask(task);
 	}
+	
 	public boolean stateTask(Task task){
 		return dao.stateTask(task);
 	}

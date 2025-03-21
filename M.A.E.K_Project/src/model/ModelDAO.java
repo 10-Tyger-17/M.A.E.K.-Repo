@@ -11,5 +11,4 @@ public interface ModelDAO {
 	public boolean removeTask(Task task);
 	public boolean modifyTask(Task task);
 	public boolean stateTask(Task task);
-
 }

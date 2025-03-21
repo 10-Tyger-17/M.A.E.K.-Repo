@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -52,10 +51,11 @@ public class WindowMenu extends JFrame implements ActionListener {
     private JLabel lblMonth;
     private JLabel lblYear;
 
-	public WindowMenu(JDialog parent, Client client, Controller cont) {
+	public WindowMenu(Client client, Controller cont) {
 		this.cont = cont;
 		this.client = client;
 		setBounds(100, 100, 910, 624);
+		setTitle("M.A.E.K.");
 		getContentPane().setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowLogin.class.getResource("/visual/Assets/Logo.jpg")));
@@ -244,11 +244,25 @@ public class WindowMenu extends JFrame implements ActionListener {
     }
 	
 	public void checkTasks() {
+		boolean exists = false;
+		boolean passed = false;
 		for (Task task : cont.getTasks(client)) {
 			if (ChronoUnit.DAYS.between(LocalDate.now(), task.getDue_date()) < 3) {
-				JOptionPane.showMessageDialog(this, "Check your tasks because only left 3 days or minus", "Warning", JOptionPane.WARNING_MESSAGE);
-				break;
+				exists = true;
 			}
+			
+			if (task.getDue_date().isBefore(LocalDate.now())) {
+				cont.stateTask(task);
+				passed = true;
+			}
+		}
+		
+		if (exists) {
+			JOptionPane.showMessageDialog(this, "Check your tasks because there are some with 3 days or less remaining", "Warning", JOptionPane.WARNING_MESSAGE);
+		}
+		
+		if (passed) {
+			JOptionPane.showMessageDialog(this, "Some of your tasks have been marked as completed because the date has passed", "Warning", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 }

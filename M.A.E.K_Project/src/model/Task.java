@@ -80,14 +80,7 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "Task [id=" + id + ", task_name=" + task_name + ", task_description=" + task_description + ", due_date="
-				+ due_date + ", task_state=" + task_state + ", username=" + username + ", category=" + category
-				+ "]";
-	}
-	
-	
-	
-	
-	
-	
+		return "Name: " + task_name + ", Description: " + task_description + ", Due date: "
+				+ due_date + ", State: " + task_state + ", Category: " + category;
+	}	
 }

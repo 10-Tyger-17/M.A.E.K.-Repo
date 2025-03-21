@@ -5,10 +5,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +22,7 @@ import model.Client;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class WindowLogin extends JDialog implements ActionListener{
+public class WindowLogin extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -37,7 +38,9 @@ public class WindowLogin extends JDialog implements ActionListener{
 	
 	public WindowLogin(Controller cont) {
 		this.cont = cont;
+		setTitle("M.A.E.K.");
 		setBackground(new Color(173, 181, 189));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowLogin.class.getResource("/visual/Assets/Logo.jpg")));
 		setResizable(false);
 		setBounds(100, 100, 800, 530);
@@ -107,20 +110,15 @@ public class WindowLogin extends JDialog implements ActionListener{
 			if(client==null) {
 				textField.setBackground(new Color(255,120,120));
 				passwordField.setBackground(new Color(255,120,120));
+				JOptionPane.showMessageDialog(this, "Enter valid credentials", "Error", JOptionPane.ERROR_MESSAGE);
 			}else {
-				WindowMenu ventana=new WindowMenu(this, client, cont);
+				WindowMenu ventana=new WindowMenu(client, cont);
 				ventana.setVisible(true);
 				this.dispose();
 			}
-			
-		}
-		if(e.getSource()==btnSignUp) {
+		} else if(e.getSource()==btnSignUp) {
 			WindowSignUp WindowSignUp = new WindowSignUp(this,cont);
 			WindowSignUp.setVisible(true);
-			this.dispose();
 		}
-			
 	}
-	
-	
 }

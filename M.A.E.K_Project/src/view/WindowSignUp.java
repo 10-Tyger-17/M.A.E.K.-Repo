@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -11,6 +12,8 @@ import controller.Controller;
 import model.Client;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
@@ -21,7 +24,7 @@ import java.awt.Color;
 
 public class WindowSignUp extends JDialog implements ActionListener{
 	private static final long serialVersionUID = 1L;
-	
+
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldName;
 	private JTextField textFieldAge;
@@ -34,30 +37,26 @@ public class WindowSignUp extends JDialog implements ActionListener{
 	private JLabel lblPassword;
 	private JButton btnSignUp;
 	private Controller cont;
-	private JDialog parent;
 	private Client client;
-	
 
-	/**
-	 * Create the dialog.
-	 */
-	public WindowSignUp(JDialog parent,Controller cont) {
+
+	public WindowSignUp(JFrame parent,Controller cont) {
 		super(parent,true);
-		this.parent=parent;
 		this.cont=cont;
+		setTitle("M.A.E.K.");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(WindowSignUp.class.getResource("/visual/Assets/Logo.jpg")));
 		setBounds(100, 100, 464, 532);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		lblSignUp = new JLabel("Sign Up");
 		lblSignUp.setForeground(new Color(33, 37, 41));
 		lblSignUp.setFont(new Font("Source Code Pro", Font.PLAIN, 72));
 		lblSignUp.setBounds(60, 11, 326, 91);
 		contentPanel.add(lblSignUp);
-		
+
 		textFieldName = new JTextField();
 		textFieldName.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		textFieldName.setBorder(null);
@@ -65,19 +64,19 @@ public class WindowSignUp extends JDialog implements ActionListener{
 		textFieldName.setBounds(32, 124, 391, 39);
 		contentPanel.add(textFieldName);
 		textFieldName.setColumns(10);
-		
+
 		lblName = new JLabel("Name");
 		lblName.setForeground(new Color(33, 37, 41));
 		lblName.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblName.setBounds(33, 93, 74, 34);
 		contentPanel.add(lblName);
-		
+
 		lblAge = new JLabel("Age");
 		lblAge.setForeground(new Color(33, 37, 41));
 		lblAge.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblAge.setBounds(34, 172, 74, 34);
 		contentPanel.add(lblAge);
-		
+
 		textFieldAge = new JTextField();
 		textFieldAge.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		textFieldAge.setBorder(null);
@@ -85,13 +84,13 @@ public class WindowSignUp extends JDialog implements ActionListener{
 		textFieldAge.setBounds(33, 203, 391, 39);
 		contentPanel.add(textFieldAge);
 		textFieldAge.setColumns(10);
-		
+
 		lblUsername = new JLabel("Username");
 		lblUsername.setForeground(new Color(33, 37, 41));
 		lblUsername.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblUsername.setBounds(33, 251, 121, 34);
 		contentPanel.add(lblUsername);
-		
+
 		textFieldUsername = new JTextField();
 		textFieldUsername.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		textFieldUsername.setBorder(null);
@@ -99,13 +98,13 @@ public class WindowSignUp extends JDialog implements ActionListener{
 		textFieldUsername.setBounds(33, 282, 391, 39);
 		contentPanel.add(textFieldUsername);
 		textFieldUsername.setColumns(10);
-		
+
 		lblPassword = new JLabel("Password");
 		lblPassword.setForeground(new Color(33, 37, 41));
 		lblPassword.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		lblPassword.setBounds(32, 330, 122, 34);
 		contentPanel.add(lblPassword);
-		
+
 		textFieldPassword = new JTextField();
 		textFieldPassword.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
 		textFieldPassword.setBorder(null);
@@ -113,7 +112,7 @@ public class WindowSignUp extends JDialog implements ActionListener{
 		textFieldPassword.setBounds(33, 364, 391, 39);
 		contentPanel.add(textFieldPassword);
 		textFieldPassword.setColumns(10);
-		
+
 		btnSignUp = new JButton("Sign Up");
 		btnSignUp.setForeground(new Color(255, 255, 255));
 		btnSignUp.setBackground(new Color(33, 37, 41));
@@ -122,7 +121,7 @@ public class WindowSignUp extends JDialog implements ActionListener{
 		btnSignUp.addActionListener(this);
 		contentPanel.add(btnSignUp);
 	}
-	
+
 	public int changeColors(ArrayList<JTextField> fields) {
 		int count;
 
@@ -135,7 +134,7 @@ public class WindowSignUp extends JDialog implements ActionListener{
 				i.setBackground(new Color(173, 181, 189));
 			}
 		}
-		
+
 		return count;
 	}
 
@@ -143,28 +142,30 @@ public class WindowSignUp extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnSignUp) {
 			boolean valid=false;
-			
+
 			ArrayList<JTextField> fields=new ArrayList<JTextField>();
 			fields.add(textFieldUsername);
 			fields.add(textFieldName);
 			fields.add(textFieldPassword);
 			fields.add(textFieldAge);
-			
+
 			if (changeColors(fields) == 4) {
 				try {
 					client = cont.signUp(textFieldUsername.getText(), textFieldName.getText(), textFieldPassword.getText(), Integer.parseInt(textFieldAge.getText()));
 					valid=true;
 				} catch (NumberFormatException ex) {
 					textFieldAge.setBackground(new Color(255, 120, 120));
+					JOptionPane.showMessageDialog(this, "Enter valid age", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				
+
 				if(valid) {
 					this.dispose();
-					WindowMenu ventana= new WindowMenu(parent, client, cont);
+					WindowMenu ventana= new WindowMenu(client, cont);
 					ventana.setVisible(true);
 				}
+			} else {
+				JOptionPane.showMessageDialog(this, "Enter valid data", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
 	}
 }
