@@ -180,12 +180,14 @@ public class WindowMenu extends JFrame implements ActionListener {
 		} else if (e.getSource() == btnAddTask) {
 			WindowAddTask windowAddTask = new WindowAddTask(this, client, cont);
 			windowAddTask.setVisible(true);
-		} else if (e.getSource() == btnDeleteTask) {
-			
 		} else if (e.getSource() == btnModifyTask) {
 			WindowModifyTask windowModifyTask = new WindowModifyTask(this, client, cont);
 			windowModifyTask.setVisible(true);
+		} else if(e.getSource()== btnDeleteTask) {
+			WindowDeleteTask windowDeleteTask = new WindowDeleteTask(this, client, cont);
+			windowDeleteTask.setVisible(true);
 		}
+	
 	}
 
 	private void createCalendar() {
@@ -236,4 +238,4 @@ public class WindowMenu extends JFrame implements ActionListener {
 		
 		
 	}
-}
+
