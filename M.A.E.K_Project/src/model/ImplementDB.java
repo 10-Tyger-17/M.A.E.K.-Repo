@@ -29,7 +29,7 @@ public class ImplementDB implements ModelDAO {
 	final String SQLREMOVETASK = "DELETE FROM task WHERE id = ?;";
 	final String SQLMODIFYTASK = "UPDATE task SET task_description = ? WHERE id = ?;";
 	final String SQLSTATETASK = "UPDATE task SET task_state = ? WHERE id = ?;";
-	final String SQLALLCATEGORIES = "SELECT * FROM category;";
+	final String SQLALLCATEGORIES = "SELECT * FROM category WHERE category_name = ?;";
 	final String SQLSETCATEGORY = "INSERT INTO category VALUES (?, ?);";
 	
 	public ImplementDB() {
@@ -171,7 +171,7 @@ public class ImplementDB implements ModelDAO {
 	    this.openConnection();
 	    
 	    try {
-	        stmt = con.prepareStatement("SELECT * FROM Categories WHERE category_name = ?");
+	        stmt = con.prepareStatement(SQLALLCATEGORIES);
 	        stmt.setString(1, task.getCategory());
 	        ResultSet result = stmt.executeQuery();
 	        

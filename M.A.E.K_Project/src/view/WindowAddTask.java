@@ -89,7 +89,7 @@ public class WindowAddTask extends JDialog implements ActionListener {
 
 		lblDueDate = new JLabel("Due date (yyyy-MM-dd)");
 		lblDueDate.setFont(new Font("Source Code Pro", Font.PLAIN, 24));
-		lblDueDate.setBounds(29, 251, 121, 34);
+		lblDueDate.setBounds(29, 251, 372, 34);
 		contentPanel.add(lblDueDate);
 
 		rdbtnPending = new JRadioButton("Pending");
@@ -136,6 +136,11 @@ public class WindowAddTask extends JDialog implements ActionListener {
 		if (e.getSource() == btnAdd) {
 			try {
 				checkDate();
+				JOptionPane.showMessageDialog(this, "The task " + textFieldName.getText() + " is added succesfully", "Completed", JOptionPane.INFORMATION_MESSAGE);
+				textFieldName.setText("");
+				lblDescription.setText("");
+				textFieldCategory.setText("");
+				textFieldDueDate.setText("");
 			} catch (IllegalDateException e1) {
 				JOptionPane.showMessageDialog(this, "There is a problem with the date\n" + e1.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
 			}
