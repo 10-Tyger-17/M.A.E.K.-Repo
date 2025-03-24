@@ -5,7 +5,7 @@ public class Client {
 	private String client_name;
 	private String client_password;
 	private int age;
-	
+
 	public Client(String username, String client_name, String client_password, int age) {
 		this.username = username;
 		this.client_name = client_name;

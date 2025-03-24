@@ -10,7 +10,7 @@ public class Task {
 	private Task_state_Enum task_state;
 	private String username;
 	private String category;
-	
+
 	public Task(int id, String task_name, String task_description, LocalDate due_date, Task_state_Enum task_state,
 			String username, String category) {
 		this.id = id;

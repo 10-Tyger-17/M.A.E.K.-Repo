@@ -10,7 +10,7 @@ import model.Client;
 
 class TestClient {
 	Client client;
-	
+
 	@BeforeEach
 	void setUp() throws Exception {
 		client = new Client("Test", "Test", "Test", 23);
@@ -20,12 +20,12 @@ class TestClient {
 	void tearDown() throws Exception {
 		client = null;
 	}
-	
+
 	@Test
 	void constructorTest() {
 		assertNotNull(client);
 	}
-	
+
 	@Test
 	void gettersTest() {
 		assertEquals("Test", client.getUsername());
@@ -33,7 +33,7 @@ class TestClient {
 		assertEquals("Test", client.getClient_password());
 		assertEquals(23, client.getAge());
 	}
-	
+
 	@Test
 	void settersTest() {
 		client.setUsername("Test2");

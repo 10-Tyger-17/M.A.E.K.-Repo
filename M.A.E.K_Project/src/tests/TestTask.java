@@ -28,7 +28,7 @@ class TestTask {
 	void constructorTest() {
 		assertNotNull(task);
 	}
-	
+
 	@Test
 	void gettersTest() {
 		assertEquals(0, task.getId());
@@ -39,7 +39,7 @@ class TestTask {
 		assertEquals("Test", task.getUsername());
 		assertEquals("Test", task.getCategory());
 	}
-	
+
 	@Test
 	void settersTest() {
 		task.setId(1);
@@ -56,6 +56,6 @@ class TestTask {
 		assertEquals(Task_state_Enum.COMPLETED, task.getTask_state());
 		assertEquals("Test2", task.getUsername());
 		assertEquals("Test2", task.getCategory());
-		
+
 	}
 }

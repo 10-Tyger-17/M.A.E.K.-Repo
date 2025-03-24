@@ -10,9 +10,9 @@ import model.Task;
 import view.WindowLogin;
 
 public class Controller {
-	
+
 	ModelDAO dao = new ImplementDB();
-	
+
 	public void showScreen() {
 		WindowLogin frameLogin = new WindowLogin(this);
 		frameLogin.setVisible(true);
@@ -38,7 +38,7 @@ public class Controller {
 	public boolean modifyTask(Task task){
 		return dao.modifyTask(task);
 	}
-	
+
 	public boolean stateTask(Task task){
 		return dao.stateTask(task);
 	}

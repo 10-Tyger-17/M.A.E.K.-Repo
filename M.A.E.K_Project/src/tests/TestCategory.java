@@ -10,7 +10,7 @@ import model.Category;
 
 class TestCategory {
 	Category category;
-	
+
 	@BeforeEach
 	void setUp() throws Exception {
 		category = new Category("Test", "Test");
@@ -25,13 +25,13 @@ class TestCategory {
 	void constructorTest() {
 		assertNotNull(category);
 	}
-	
+
 	@Test
 	void gettersTest() {
 		assertEquals("Test", category.getCategory_name());
 		assertEquals("Test", category.getCategory_description());
 	}
-	
+
 	@Test
 	void settersTest() {
 		category.setCategory_name("Test2");

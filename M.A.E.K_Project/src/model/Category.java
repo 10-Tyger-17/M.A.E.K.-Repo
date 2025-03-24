@@ -4,7 +4,7 @@ package model;
 public class Category {
 	private String category_name;
 	private String category_description;
-	
+
 	public Category(String category_name, String category_description) {
 		this.category_name = category_name;
 		this.category_description = category_description;
@@ -21,7 +21,7 @@ public class Category {
 	public void setCategory_description(String category_description) {
 		this.category_description = category_description;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Category: " + category_name + "    " + "Description: " + category_description;
