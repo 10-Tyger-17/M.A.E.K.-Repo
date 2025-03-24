@@ -31,6 +31,10 @@ public class ImplementDB implements ModelDAO {
 	final String SQLALLCATEGORIES = "SELECT * FROM category WHERE category_name = ?;";
 	final String SQLSETCATEGORY = "INSERT INTO category VALUES (?, ?);";
 	
+	/**
+	* This method is the constructor of the class ImplementDB
+	*/
+	
 	public ImplementDB() {
 		this.configFile = ResourceBundle.getBundle("configs.configClase");
 		this.driverBD = this.configFile.getString("Driver");
@@ -38,6 +42,10 @@ public class ImplementDB implements ModelDAO {
 		this.userBD = this.configFile.getString("DBUser");
 		this.passwordBD = this.configFile.getString("DBPass");
 	}
+	
+	/**
+	* This method opens the connection to the database
+	*/
 
 	private void openConnection() {
 		try {
@@ -49,6 +57,10 @@ public class ImplementDB implements ModelDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	* This method closes the connection to the database
+	*/
 
 	private void closeConnection() {
 		try {
@@ -62,6 +74,13 @@ public class ImplementDB implements ModelDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	* This method checks the user name and passwords in the database to see if they correspond with a user.
+	* @param username This is the user name to look for
+	* @param password This is the password to look for
+	* @return client who's user name and password corresponds with the parameters
+	*/
 
 	@Override
 	public Client login(String username, String password) {
@@ -86,6 +105,15 @@ public class ImplementDB implements ModelDAO {
 		
 		return client;
 	}
+	
+	/**
+	* This method adds a new user to the database, managing all exception and errors.
+	* @param username This is the user name of the user
+	* @param client_name This is the real name of the user
+	* @param client_password This is the password of the user
+	* @param age The current age of the client
+	* @return the newly created client
+	*/
 	
 	@Override
 	public Client signUp(String username, String client_name, String client_password, int age) {
@@ -113,6 +141,12 @@ public class ImplementDB implements ModelDAO {
 		return client;
 	}
 	
+	/**
+	* This method gets all the categories of a client from the database and sorts them.
+	* @param client This is the client to get the categories from
+	* @return an array list of categories
+	*/
+	
 	@Override
 	public ArrayList<Category> getCategories(Client client) {
 	    ArrayList<Category> categories = new ArrayList<>();
@@ -137,6 +171,12 @@ public class ImplementDB implements ModelDAO {
 	    
 	    return categories;
 	}
+	
+	/**
+	* This method gets all the tasks of a client from the database and sorts them.
+	* @param client This is the client to get the tasks from
+	* @return an array list of tasks
+	*/
 
 	@Override
 	public ArrayList<Task> getTasks(Client client) {
@@ -162,6 +202,12 @@ public class ImplementDB implements ModelDAO {
 		
 		return tasks;
 	}
+	
+	/**
+	* This method adds a new task to the database, managing all exception and errors.
+	* @param task The new task which needs to be added
+	* @return whether there was an error or not during the process
+	*/
 	
 	@Override
 	public boolean setTask(Task task) {
@@ -206,7 +252,12 @@ public class ImplementDB implements ModelDAO {
 	    return error;
 	}
 
-
+	/**
+	* This method deletes a task to the database, managing all exception and errors.
+	* @param task The task which should be deleted
+	* @return whether there was an error or not during the process
+	*/
+	
 	@Override
 	public boolean removeTask(Task task) {
 		boolean error = false;
@@ -230,6 +281,12 @@ public class ImplementDB implements ModelDAO {
 		
 		return error;
 	}
+	
+	/**
+	* This method modifies a task to the database, managing all exception and errors.
+	* @param task The task which should be modified in the database
+	* @return whether there was an error or not during the process
+	*/
 	
 	@Override
 	public boolean modifyTask(Task task) {
@@ -289,6 +346,12 @@ public class ImplementDB implements ModelDAO {
 
 	    return error;
 	}
+	
+	/**
+	* This method checks the state of a task, managing all exception and errors.
+	* @param task The task which should be checked
+	* @return whether there was an error or not during the process
+	*/
 	
 	@Override
 	public boolean stateTask(Task task) {
