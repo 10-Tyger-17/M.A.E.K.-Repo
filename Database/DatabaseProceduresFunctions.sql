@@ -14,7 +14,7 @@ BEGIN
         SELECT CONCAT('New client added ', usernameP) AS Message;
     END IF;
 END //
--- drop procedure Unsubscribe;
+
 
 CREATE PROCEDURE Unsubscribe (usernameP VARCHAR(255), client_passwordP VARCHAR(255))
 READS SQL DATA
@@ -45,33 +45,7 @@ BEGIN
     END IF;
 END //
 
--- he intentado controlar el enum en caso de introducirlo mal pero no he podido
-/*create procedure AddTask (task_name VARCHAR(255), task_description VARCHAR(255), due_date DATE, task_state ENUM('PENDING', 'COMPLETED'), username VARCHAR(255), category_name VARCHAR(255))
-reads sql data
-begin
-declare category_exists int default 0;
 
-declare continue handler for SQLEXCEPTION
-    begin
-        select concat('Invalid data format') Error;
-    end;
-    
-IF task_state NOT IN ('PENDING', 'COMPLETED') THEN
-        SELECT CONCAT('Invalid task state. Must be PENDING or COMPLETED') AS Error;
-else
-	select count(*) into category_exists 
-	from category c 
-	where c.category_name=category_name;
-	if category_exists>0 then
-		insert into task (task_name, task_description, due_date, task_state, username, category_name) VALUES (task_name, task_description, due_date, 'pending', username, category_name);
-		select concat('Task "', task_name, '" added for user ', username) AS Message;
-	else
-		select concat('The category "', category_name, '" does not exist');
-	end if;
-END IF;
-end//*/
-
--- se supone que esto se usaria tras iniciar sesion, por lo tanto no hace falta verificar usuario
 CREATE PROCEDURE AddTask (task_nameP VARCHAR(255), task_descriptionP VARCHAR(255), due_dateP DATE, task_stateP ENUM('PENDING', 'COMPLETED'), usernameP VARCHAR(255), category_nameP VARCHAR(255))
 READS SQL DATA
 BEGIN
@@ -85,21 +59,27 @@ BEGIN
 		SELECT CONCAT('Invalid data format') AS Error;
         END;
         */
+        SELECT username FROM client WHERE username = usernameP;
         
 
     SELECT COUNT(*) INTO category_exists 
     FROM category c 
     WHERE c.category_name = category_nameP;
 
-IF foundUser
+IF foundUser = 1 then 
     IF category_exists > 0 THEN
         INSERT INTO task (task_name, task_description, due_date, task_state, username, category_name) 
-        VALUES (task_name, task_description, due_date, 'pending', username, category_name);
-        SELECT CONCAT('Task "', task_name, '" added for user ', username) AS Message;
+        VALUES (task_nameP, task_descriptionP, due_dateP, task_stateP, usernameP, category_nameP);
+        SELECT CONCAT('Task "', task_nameP, '" added for user ', usernameP) AS Message;
     ELSE
-        SELECT CONCAT('The category "', category_name, '" does not exist') AS Error;
+        SELECT CONCAT('The category "', category_nameP, '" does not exist') AS Error;
     END IF;
+ELSE 
+	SELECT CONCAT('The task can´t be added because the username doesn´t exist.');
+END IF;
 END //
+
+
 
 CREATE PROCEDURE TasksByCategory (category_name VARCHAR(255))
 BEGIN
@@ -126,6 +106,8 @@ BEGIN
 		END WHILE;
     CLOSE c;
 END //
+
+
 
 CREATE FUNCTION CountCompletedTasks(username VARCHAR(255)) RETURNS INT
 DETERMINISTIC
@@ -196,7 +178,7 @@ DETERMINISTIC
 BEGIN
 	DECLARE v_task_name VARCHAR(255);
     DECLARE fin BOOL DEFAULT 0;
-    DECLARE all_tasks VARCHAR(1000) DEFAULT ''; -- sino se hace el default '' siempre va a ser null
+    DECLARE all_tasks VARCHAR(1000) DEFAULT ''; 
     
     DECLARE c CURSOR FOR
 		SELECT task_name FROM task t WHERE t.username=username AND t.due_date=due_date;
@@ -220,4 +202,3 @@ BEGIN
     RETURN all_tasks;
 END//
 DELIMITER ;
-call AddTask('R','R','2000-02-02','PENDING','p','a');
