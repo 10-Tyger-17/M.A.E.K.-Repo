@@ -108,36 +108,36 @@ public class WindowMenu extends JFrame implements ActionListener {
 		contentPanel.add(backgroundTop);
 
 		calendarPanel = new JPanel();
-		calendarPanel.setBounds(20, 131, 860, 323);
+		calendarPanel.setBounds(20, 219, 860, 323);
 		calendarPanel.setLayout(new BorderLayout());
 		contentPanel.add(calendarPanel);
 
 		btnPrevYear = new JButton("<<");
-		btnPrevYear.setBounds(20, 100, 50, 25);
+		btnPrevYear.setBounds(20, 184, 50, 25);
 		contentPanel.add(btnPrevYear);
 
 		btnPrevMonth = new JButton("<");
-		btnPrevMonth.setBounds(80, 100, 50, 25);
+		btnPrevMonth.setBounds(80, 184, 50, 25);
 		contentPanel.add(btnPrevMonth);
 
 		btnNextMonth = new JButton(">");
-		btnNextMonth.setBounds(770, 100, 50, 25);
+		btnNextMonth.setBounds(770, 184, 50, 25);
 		contentPanel.add(btnNextMonth);
 
 		btnNextYear = new JButton(">>");
-		btnNextYear.setBounds(830, 100, 50, 25);
+		btnNextYear.setBounds(830, 184, 50, 25);
 		contentPanel.add(btnNextYear);
 
 		lblMonth = new JLabel("");
 		lblMonth.setFont(new Font("Source Code Pro", Font.PLAIN, 25));
 		lblMonth.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMonth.setBounds(326, 94, 233, 33);
+		lblMonth.setBounds(326, 178, 233, 33);
 		contentPanel.add(lblMonth);
 
 		lblYear = new JLabel("");
 		lblYear.setFont(new Font("Source Code Pro", Font.PLAIN, 25));
 		lblYear.setHorizontalAlignment(SwingConstants.CENTER);
-		lblYear.setBounds(376, 61, 131, 25);
+		lblYear.setBounds(376, 145, 131, 25);
 		contentPanel.add(lblYear);
 
 		this.currentMonth = Calendar.getInstance().get(Calendar.MONTH);
