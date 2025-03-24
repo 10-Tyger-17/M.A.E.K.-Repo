@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -167,26 +168,58 @@ public class WindowAddTask extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnAdd) {
-            try {
-                LocalDate dueDate = checkDate();
-                Task_state_Enum state = rdbtnPending.isSelected() ? Task_state_Enum.PENDING : Task_state_Enum.COMPLETED;
+        	ArrayList<JTextField> fields = new ArrayList<JTextField>();
+            fields.add(textFieldDescription);
+            fields.add(textFieldName);
+            fields.add(textFieldDueDate);
+    		fields.add(textFieldCategory);
 
-                if (!cont.setTask(new Task(0, textFieldName.getText(), textFieldDescription.getText(), dueDate, state, client.getUsername(), textFieldCategory.getText()))) {
-                    JOptionPane.showMessageDialog(this, "The task has been added successfully", "Completed", JOptionPane.INFORMATION_MESSAGE);
-                    textFieldName.setText("");
-                    textFieldDescription.setText("");
-                    textFieldCategory.setText("");
-                    textFieldDueDate.setText("");
-                    rdbtnPending.setSelected(true);
-                } else {
-                    JOptionPane.showMessageDialog(this, "An error has occurred adding the task", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (IllegalDateException e1) {
-                JOptionPane.showMessageDialog(this, "There is a problem with the date\n" + e1.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
-            }
+            if (changeColors(fields) == 4) {
+				try {
+					LocalDate dueDate = checkDate();
+					Task_state_Enum state = rdbtnPending.isSelected() ? Task_state_Enum.PENDING
+							: Task_state_Enum.COMPLETED;
+
+					if (!cont.setTask(new Task(0, textFieldName.getText(), textFieldDescription.getText(), dueDate,
+							state, client.getUsername(), textFieldCategory.getText()))) {
+						JOptionPane.showMessageDialog(this, "The task has been added successfully", "Completed",
+								JOptionPane.INFORMATION_MESSAGE);
+						textFieldName.setText("");
+						textFieldDescription.setText("");
+						textFieldCategory.setText("");
+						textFieldDueDate.setText("");
+						rdbtnPending.setSelected(true);
+					} else {
+						JOptionPane.showMessageDialog(this, "An error has occurred adding the task", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (IllegalDateException e1) {
+					JOptionPane.showMessageDialog(this, "There is a problem with the date\n" + e1.getMessage(),
+							"Warning", JOptionPane.WARNING_MESSAGE);
+				} 
+			}
         } else if (e.getSource() == btnExit) {
             dispose();
         }
+    }
+    
+    /**
+     * Changes the background color of text fields based on their content.
+     *
+     * @param fields the list of text fields to check
+     * @return the count of non-empty text fields
+     */
+    public int changeColors(ArrayList<JTextField> fields) {
+        int count = 0;
+        for (JTextField i : fields) {
+            if (i.getText().equals("")) {
+                i.setBackground(new Color(255, 120, 120));
+            } else {
+                count++;
+                i.setBackground(new Color(173, 181, 189));
+            }
+        }
+        return count;
     }
 
     /**
@@ -198,19 +231,16 @@ public class WindowAddTask extends JDialog implements ActionListener {
     public LocalDate checkDate() throws IllegalDateException {
         String dateText = textFieldDueDate.getText();
         LocalDate dueDate = null;
+			try {
+				dueDate = LocalDate.parse(dateText);
 
-        if (!dateText.isEmpty()) {
-            try {
-                dueDate = LocalDate.parse(dateText);
-
-                if (dueDate.isBefore(LocalDate.now())) {
-                    throw new IllegalDateException("The date can't be in the past.");
-                }
-            } catch (DateTimeParseException e) {
-                throw new IllegalDateException("Date format invalid. Must be yyyy-MM-dd.");
-            }
-        }
-
-        return dueDate;
+				if (dueDate.isBefore(LocalDate.now())) {
+					throw new IllegalDateException("The date can't be in the past.");
+				}
+			} catch (DateTimeParseException e) {
+				throw new IllegalDateException("Date format invalid. Must be yyyy-MM-dd.");
+			}
+		
+		return dueDate;
     }
 }
