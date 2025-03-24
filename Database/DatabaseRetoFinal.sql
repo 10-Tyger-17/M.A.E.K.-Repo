@@ -33,3 +33,5 @@ INSERT INTO category (category_name, category_description) VALUES ("Personal", "
 
 -- Table task inserts
 INSERT INTO task (task_name, task_description, due_date, task_state, username, category_name) VALUES ("Buy groceries", "Buy groceries for the week", "2025-04-30", "pending", "ekaitz123", "Shopping"), ("Go gym", "Pay the month for the gym and go", "2025-04-30", "pending", "alicia123", "Personal");
+
+SELECT * FROM CLIENT;

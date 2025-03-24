@@ -101,7 +101,7 @@ public class ImplementDB implements ModelDAO {
 			result = stmt.executeQuery();
 			result.next();
 
-			if (result.getString("Mensaje") != null) {
+			if (result.getString("Message") != null) {
 			    client = new Client(username, client_name, client_password, age);
 			}
 		} catch (SQLException e) {
