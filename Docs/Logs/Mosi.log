@@ -1,0 +1,233 @@
+commit 324e8cfbb0839ae34c6a99d7715ce4434fac2eb0
+Merge: 81e4c39 0dbe537
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 13:57:47 2025 +0100
+
+    Merge branch 'mosi' into main
+
+commit 0dbe537ebcca7b0f2c07f16914f64ad52bd9d83a
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 13:56:05 2025 +0100
+
+    Fixing Errors and Tests
+
+commit 81e4c3988389d44995ac16d0d846790679fcc5ce
+Merge: 6b8f369 63e89c0
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 13:37:50 2025 +0100
+
+    Merge branch 'mosi' into main
+
+commit 63e89c06804205cc9a9c36b22d7cbee15976ee24
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 13:37:37 2025 +0100
+
+    Adding Java Doc
+
+commit 6b8f369ecf808755bc8e94635993343a091e297c
+Merge: b11cfd2 40c4144
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 13:12:11 2025 +0100
+
+    Merge branch 'mosi' into main
+
+commit 40c4144a537197c232c10b47355ceae743ee48d2
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 13:11:51 2025 +0100
+
+    Adding Java Doc To Implement DB
+
+commit b11cfd208272f02ec5afe6f557b6dbdd5fee4d8d
+Merge: 4aa2905 39855cd
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 13:00:54 2025 +0100
+
+    Merge branch 'main' of https://github.com/10-Tyger-17/M.A.E.K.-Repo
+
+commit 4aa2905521a61a2b76c381e4a2433c4a73ad62d9
+Merge: 77f2b84 3db83dc
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 12:37:08 2025 +0100
+
+    Merge branch 'main' of https://github.com/10-Tyger-17/M.A.E.K.-Repo
+
+commit 77f2b84319ff8121029bcc94300f07e785e046bb
+Merge: 02f391e 2dded46
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 09:42:32 2025 +0100
+
+    Merge branch 'main' of https://github.com/10-Tyger-17/M.A.E.K.-Repo
+    Pull
+
+commit 02f391e9dbbe416b5ced01ed4a0f88bdaca38e82
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 09:41:07 2025 +0100
+
+    Fixing Signup Error
+
+commit ed910dab8ca2130d563021b52f54c5e8efe46900
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 08:47:32 2025 +0100
+
+    Fixing error in signup
+
+commit b0d84554d3472649703a7ef89c5dc9434da94972
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 08:37:11 2025 +0100
+
+    Removing Config
+
+commit dd67ee5157ab3e07896b06708fb7f76a31ef410b
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 24 08:32:54 2025 +0100
+
+    Fixing Menu Window
+
+commit dd88270a8ae47ebd492c35544e01e146753c3fc9
+Merge: f80eb33 886e0f6
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Thu Mar 20 10:54:14 2025 +0100
+
+    Merge branch 'mosi' into main
+
+commit 886e0f636624bd4f25fd43bd79e41a6559b0b529
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Thu Mar 20 10:53:31 2025 +0100
+
+    Changing Database and Adding Modify Window
+
+commit 6cdb5aa1e1f9f62e56d90f4edecbda964274fc3d
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Thu Mar 20 09:56:58 2025 +0100
+
+    Fixing And adding functionality to menu
+
+commit 41bca068b5a6dd868ccf96e1b288ba59af0f0e07
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Thu Mar 20 09:50:24 2025 +0100
+
+    Converting Menu To JFrame and Login To Dialog
+
+commit c2d1693fbb12a4983d7fec5fe511b0bef338c9f5
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Thu Mar 20 09:24:59 2025 +0100
+
+    Fixing Sign Up Window And Calender
+
+commit df42ad099a29ee0996f88c380cf4cf0ee0cd70af
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 12:29:39 2025 +0100
+
+    Fixing Sign Up Error
+
+commit f015dd27c9a1848a39e237150757a23f1f843574
+Merge: bd06f28 9ec23a0
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 12:19:40 2025 +0100
+
+    Merge branch 'mosi' into main
+
+commit 9ec23a07bb428b57b9d53065553bfde9a41eda91
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 12:18:48 2025 +0100
+
+    Adding Functionality To Sign Up and Log In
+
+commit 9bd709040111cb6864f35be14ba921da28b12426
+Merge: 6dab824 20a44d0
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 10:48:26 2025 +0100
+
+    Merge branch 'mosi' into main
+
+commit 20a44d0b047247404b8f472cd407fbdfdeb017eb
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 10:47:54 2025 +0100
+
+    Adding Window Menu
+
+commit 9d85dde5ee1af6c769cc295b0b5ffb1e817f326c
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 09:42:59 2025 +0100
+
+    Changing Field Borders
+
+commit 8f53134a868e709878925ab2f6929d32e765640f
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 09:32:37 2025 +0100
+
+    Changing Login Window
+
+commit 812b5ce49b75cd4bcb4eff8cdd594a641b5e136e
+Merge: d508c6b 3792612
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Tue Mar 18 10:49:24 2025 +0100
+
+    Merge branch 'mosi'
+    Merging Mosi
+
+commit 37926125d01ee7ccf029c84218241a0af25a93db
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Tue Mar 18 10:48:53 2025 +0100
+
+    Adding Login Window
+
+commit 0849614d62ccfb40f98d011d0f7458fe0434535f
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 13:57:22 2025 +0100
+
+    Stop tracking configs directory
+
+commit db6894baff91e459c38803948c55cf62732787b2
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 13:56:11 2025 +0100
+
+    Stop tracking configs directory
+
+commit 057d12e71ed06baa7357b3433c4aed28d9553d5f
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 13:44:26 2025 +0100
+
+    Adding to Git Ignore
+
+commit 8a2c47b3bc411cdee7fde57b81a0b8b7051f7739
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 13:41:12 2025 +0100
+
+    Testing and updating
+
+commit 8fa3d9b0945e16feb731fb6b5d51f8d664290a5d
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 13:14:05 2025 +0100
+
+    Adding java
+
+commit ff796a78707278306f12b6e2167754b5170d03d4
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 12:42:17 2025 +0100
+
+    Deleting Folders
+
+commit 8e90f5b827a55bac0123ead23a60d9203f779821
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 09:54:08 2025 +0100
+
+    Adding Content
+
+commit 0a9651e456acaa928c93d3d5681fa79c6777d9fc
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 09:51:12 2025 +0100
+
+    Initialization
+
+commit ba5ec365712004c87aad42f6d6c0a49a2c7e70a6
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 09:42:37 2025 +0100
+
+    17-3-25
+
+commit 97725866d3a4c4ef6599c8aa8ad605e489ae7dc5
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 09:37:13 2025 +0100
+
+    Initial commit

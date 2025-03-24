@@ -24,7 +24,7 @@ desktop.ini
 .vscode/
 
 # Logs and temporary files
-*.log
+M.A.E.K_Project/**/*.log
 *.tmp
 
 M.A.E.K_PROJECT/src/module-info.java

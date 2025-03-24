@@ -1,0 +1,131 @@
+commit 39855cd295c5e9428f9523b46a49ffd11f72a8b6
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Mon Mar 24 12:58:51 2025 +0100
+
+    Database
+
+commit 8ddfc31c8b4aa957a37738e60c7d253c8ffb634e
+Merge: 51b8bad ed910da
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Mon Mar 24 09:31:28 2025 +0100
+
+    Merge branch 'main' of https://github.com/10-Tyger-17/M.A.E.K.-Repo
+    merge
+
+commit 51b8bad094c3bddcf5ca2a351a74fe587db7cc46
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Mon Mar 24 09:27:48 2025 +0100
+
+    SQL for Mosi
+
+commit 7a463590603c3b42c143c1dd28c1fabc3d1e127d
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Fri Mar 21 12:21:04 2025 +0100
+
+    Delete
+
+commit eb9a31c3986e2cb5a8a04b859f3477ab85567065
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Fri Mar 21 11:59:39 2025 +0100
+
+    DeleteWindow in process
+
+commit 3c5fd69afa1d07c7619d018b9b70521f042818ae
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Fri Mar 21 10:53:44 2025 +0100
+
+    DeleteWindow and Menu
+
+commit c0b300b08724d70aeb9ca4ecb07bb16403ef66be
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Fri Mar 21 09:39:53 2025 +0100
+
+    DeleteWindow
+
+commit f80eb33d53c71aef01866b50c96484b81f61b15c
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Thu Mar 20 10:51:24 2025 +0100
+
+    Attributes and ButtonGroup
+
+commit 7217dc3a72fd5723eb604e9bcf15fe5cf9a970c9
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Thu Mar 20 10:32:51 2025 +0100
+
+    Add Task creation
+
+commit dd7d54acf6ca3155c8c24a3d9210dddf32978e47
+Merge: 6ba5017 d894f13
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Wed Mar 19 12:41:57 2025 +0100
+
+    Merge branch 'main' of https://github.com/10-Tyger-17/M.A.E.K.-Repo
+    Trying merge
+
+commit 6ba501701cd35320ef4519209ec37913a91caf8d
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Wed Mar 19 12:40:54 2025 +0100
+
+    Show tasks window
+
+commit 181148e44713156e9cc6fb1712437768b60af5a4
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Wed Mar 19 10:32:03 2025 +0100
+
+    Implementation of SignUp
+
+commit 2e34c085a1159fd5f975d2a4b8c6659cedc5c7f6
+Merge: 839a410 ef0121a
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Wed Mar 19 10:09:08 2025 +0100
+
+    Merge branch 'Alicia' into main
+
+commit ef0121a3d9fc7fc42c8bfab7d09d4bc446f61047
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Wed Mar 19 10:08:56 2025 +0100
+
+    WindowSignUp
+
+commit 507853900df86a22f1a83904fa30f7da39a40720
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Tue Mar 18 14:22:15 2025 +0100
+
+    Controller and Window
+
+commit d508c6bed08486079b27dc28e3c4f1dec7c335a3
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Tue Mar 18 10:43:39 2025 +0100
+
+    SignUp method
+
+commit d30252c01bc36091dda37ab52546d02e3d176ab2
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Tue Mar 18 10:24:31 2025 +0100
+
+    Procedure creation
+
+commit 40a232efc5a35f057baa3a1832d0046a8ecae196
+Merge: 8d946f4 d3c3f08
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Tue Mar 18 09:51:14 2025 +0100
+
+    Merge branch 'Alicia' into main
+
+commit d3c3f0829891b76ef8cb162db5e74086bc1df3d1
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Tue Mar 18 09:50:19 2025 +0100
+
+    Model creation
+
+commit a58ef6faa5ac5833bfd12c35d9a3a5266c91eab9
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Mon Mar 17 13:49:44 2025 +0100
+
+    Adding config to ignore
+
+commit 1f4c4de125d33b453f403ec5a9624e7417f1cb2a
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Mon Mar 17 13:08:56 2025 +0100
+
+    Adding SQL table creation and DB
