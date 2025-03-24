@@ -139,6 +139,11 @@ public class WindowMenu extends JFrame implements ActionListener {
 		lblYear.setHorizontalAlignment(SwingConstants.CENTER);
 		lblYear.setBounds(376, 145, 131, 25);
 		contentPanel.add(lblYear);
+		
+		JLabel lblGreeting = new JLabel("Welcome " + client.getClient_name() + "!");
+		lblGreeting.setFont(new Font("Source Code Pro", Font.PLAIN, 35));
+		lblGreeting.setBounds(20, 59, 768, 64);
+		contentPanel.add(lblGreeting);
 
 		this.currentMonth = Calendar.getInstance().get(Calendar.MONTH);
 		this.currentYear = Calendar.getInstance().get(Calendar.YEAR);

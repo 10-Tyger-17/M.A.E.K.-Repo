@@ -1,8 +1,6 @@
 package model;
 
 public class Client {
-
-	
 	private String username;
 	private String client_name;
 	private String client_password;
@@ -49,9 +47,6 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Client [username=" + username + ", client_name=" + client_name + ", client_password=" + client_password
-				+ ", age=" + age + "]";
+		return "Username: " + username + "    Name: " + client_name + "    Password: " + client_password + "    Age: " + age;
 	}
-	
-	
 }
