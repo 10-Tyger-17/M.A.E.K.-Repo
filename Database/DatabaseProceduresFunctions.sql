@@ -1,39 +1,41 @@
 DELIMITER //
-CREATE PROCEDURE SignUp (username VARCHAR(255), client_name VARCHAR(255), client_password VARCHAR(255), age INT)
+CREATE PROCEDURE SignUp (usernameP VARCHAR(255), client_nameP VARCHAR(255), client_passwordP VARCHAR(255), ageP INT)
 READS SQL DATA
 BEGIN
-    DECLARE duplicado BOOL DEFAULT 0;
-    DECLARE CONTINUE HANDLER FOR 1062 SET duplicado = 1;
+    DECLARE dupli BOOL DEFAULT 0;
+    DECLARE CONTINUE HANDLER FOR 1062 SET dupli = 1;
+    
 
-    INSERT INTO client VALUES (username, client_name, client_password, age);
+    INSERT INTO client VALUES (usernameP, client_nameP, client_passwordP, ageP);
 
-    IF duplicado = 1 THEN
-        SELECT CONCAT('You already have a profile.', username) AS Error;
+    IF dupli = 1 THEN
+        SELECT CONCAT('You already have a profile ', usernameP) AS Message;
     ELSE
-        SELECT CONCAT('New client added.', username) AS Message;
+        SELECT CONCAT('New client added ', usernameP) AS Message;
     END IF;
 END //
+-- drop procedure Unsubscribe;
 
-CREATE PROCEDURE Unsubscribe (username VARCHAR(255), client_password VARCHAR(255))
+CREATE PROCEDURE Unsubscribe (usernameP VARCHAR(255), client_passwordP VARCHAR(255))
 READS SQL DATA
 BEGIN
-    DECLARE existe INT DEFAULT 0;
+    DECLARE exist INT DEFAULT 0;
     DECLARE password_correct INT DEFAULT 0;
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
         BEGIN
             SELECT CONCAT('An error occurred while unsubscribing.') AS Error;
         END;
 
-    SELECT COUNT(*) INTO existe FROM client c WHERE c.username = username;
+    SELECT COUNT(*) INTO exist FROM client c WHERE c.username = usernameP;
 
-    IF existe > 0 THEN
+    IF exist > 0 THEN
         SELECT COUNT(*) INTO password_correct 
         FROM client c 
-        WHERE c.username = username AND c.client_password = client_password;
+        WHERE c.username = usernameP AND c.client_password = client_passwordP;
 
         IF password_correct > 0 THEN
             DELETE FROM client c 
-            WHERE c.username = username AND c.client_password = client_password;
+            WHERE c.username = usernameP AND c.client_password = client_passwordP;
             SELECT CONCAT("You've been unsubscribed") AS Message;
         ELSE
             SELECT CONCAT("Password incorrect.") AS Error;
@@ -70,20 +72,26 @@ END IF;
 end//*/
 
 -- se supone que esto se usaria tras iniciar sesion, por lo tanto no hace falta verificar usuario
-CREATE PROCEDURE AddTask (task_name VARCHAR(255), task_description VARCHAR(255), due_date DATE, task_state ENUM('PENDING', 'COMPLETED'), username VARCHAR(255), category_name VARCHAR(255))
+CREATE PROCEDURE AddTask (task_nameP VARCHAR(255), task_descriptionP VARCHAR(255), due_dateP DATE, task_stateP ENUM('PENDING', 'COMPLETED'), usernameP VARCHAR(255), category_nameP VARCHAR(255))
 READS SQL DATA
 BEGIN
     DECLARE category_exists INT DEFAULT 0;
-
-    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+     declare foundUser bool default 1; 
+    declare continue handler for sqlstate '02000' set foundUser = 0; 
+    
+    
+   /*  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
         BEGIN
-            SELECT CONCAT('Invalid data format') AS Error;
+		SELECT CONCAT('Invalid data format') AS Error;
         END;
+        */
+        
 
     SELECT COUNT(*) INTO category_exists 
     FROM category c 
-    WHERE c.category_name = category_name;
+    WHERE c.category_name = category_nameP;
 
+IF foundUser
     IF category_exists > 0 THEN
         INSERT INTO task (task_name, task_description, due_date, task_state, username, category_name) 
         VALUES (task_name, task_description, due_date, 'pending', username, category_name);
@@ -212,3 +220,4 @@ BEGIN
     RETURN all_tasks;
 END//
 DELIMITER ;
+call AddTask('R','R','2000-02-02','PENDING','p','a');
