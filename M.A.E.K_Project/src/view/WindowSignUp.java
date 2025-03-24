@@ -152,7 +152,12 @@ public class WindowSignUp extends JDialog implements ActionListener{
 			if (changeColors(fields) == 4) {
 				try {
 					client = cont.signUp(textFieldUsername.getText(), textFieldName.getText(), textFieldPassword.getText(), Integer.parseInt(textFieldAge.getText()));
-					valid=true;
+					if (client == null) {
+						JOptionPane.showMessageDialog(this, "Username already exists", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}else {
+						valid=true;
+					}
 				} catch (NumberFormatException ex) {
 					textFieldAge.setBackground(new Color(255, 120, 120));
 					JOptionPane.showMessageDialog(this, "Enter valid age", "Error", JOptionPane.ERROR_MESSAGE);

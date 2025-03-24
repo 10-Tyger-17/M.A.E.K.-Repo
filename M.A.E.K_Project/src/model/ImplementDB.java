@@ -91,7 +91,7 @@ public class ImplementDB implements ModelDAO {
 	public Client signUp(String username, String client_name, String client_password, int age) {
 		Client client = null;
 		this.openConnection();
-		
+
 		try {
 			stmt = con.prepareStatement(SQLSIGNUP);
 			stmt.setString(1, username);
@@ -101,15 +101,15 @@ public class ImplementDB implements ModelDAO {
 			result = stmt.executeQuery();
 			result.next();
 
-			if (result.getString("Message") != null) {
-			    client = new Client(username, client_name, client_password, age);
+			if (result.getString("Message").contains("New client added")) {
+				client = new Client(username, client_name, client_password, age);
 			}
 		} catch (SQLException e) {
 			System.out.println("Error signUp: " + e.getMessage());
 		} finally {
 			this.closeConnection();
 		}
-		
+
 		return client;
 	}
 	
