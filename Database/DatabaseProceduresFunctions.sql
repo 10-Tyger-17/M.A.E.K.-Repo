@@ -54,12 +54,12 @@ BEGIN
     declare continue handler for sqlstate '02000' set foundUser = 0; 
     
     
-   /*  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
         BEGIN
 		SELECT CONCAT('Invalid data format') AS Error;
         END;
-        */
-        SELECT username FROM client WHERE username = usernameP;
+        
+        SELECT count(*) into foundUser FROM client WHERE username = usernameP;
         
 
     SELECT COUNT(*) INTO category_exists 
@@ -75,10 +75,9 @@ IF foundUser = 1 then
         SELECT CONCAT('The category "', category_nameP, '" does not exist') AS Error;
     END IF;
 ELSE 
-	SELECT CONCAT('The task can´t be added because the username doesn´t exist.');
+	SELECT CONCAT('The task can´t be added because the username doesn´t exist.') as Message;
 END IF;
 END //
-
 
 
 CREATE PROCEDURE TasksByCategory (category_name VARCHAR(255))
