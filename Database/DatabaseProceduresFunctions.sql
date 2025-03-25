@@ -50,14 +50,14 @@ CREATE PROCEDURE AddTask (task_nameP VARCHAR(255), task_descriptionP VARCHAR(255
 READS SQL DATA
 BEGIN
     DECLARE category_exists INT DEFAULT 0;
-     declare foundUser bool default 1; 
+    declare foundUser bool default 1; 
     declare continue handler for sqlstate '02000' set foundUser = 0; 
     
     
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
-        BEGIN
+    BEGIN
 		SELECT CONCAT('Invalid data format') AS Error;
-        END;
+    END;
         
         SELECT count(*) into foundUser FROM client WHERE username = usernameP;
         
