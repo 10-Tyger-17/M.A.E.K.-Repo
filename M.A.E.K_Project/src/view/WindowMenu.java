@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import controller.Controller;
 import model.Client;
 import model.Task;
+import model.Task_state_Enum;
 
 /**
  * The WindowMenu class represents the main menu window for the application.
@@ -223,87 +224,93 @@ public class WindowMenu extends JFrame implements ActionListener {
 	 * Creates the calendar view for the current month and year.
 	 */
 	private void createCalendar() {
-		calendarPanel.removeAll();
+	    calendarPanel.removeAll();
 
-		DefaultTableModel model = new DefaultTableModel() {
-			private static final long serialVersionUID = 1L;
+	    DefaultTableModel model = new DefaultTableModel() {
+	        private static final long serialVersionUID = 1L;
 
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false;
+	        }
+	    };
 
-		String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-		String[] columnNames = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-		model.setColumnIdentifiers(columnNames);
+	    String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+	    String[] columnNames = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+	    model.setColumnIdentifiers(columnNames);
 
-		JTable table = new JTable(model);
-		table.setRowHeight(50);
-		table.setFillsViewportHeight(true);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setCellSelectionEnabled(true);
+	    JTable table = new JTable(model);
+	    table.setRowHeight(50);
+	    table.setFillsViewportHeight(true);
+	    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	    table.setCellSelectionEnabled(true);
 
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(currentYear, currentMonth, 1);
-		int firstDay = calendar.get(Calendar.DAY_OF_WEEK);
-		int firstDayAdjusted = (firstDay == Calendar.SUNDAY) ? 6 : firstDay - 2;
-		int day = 1;
+	    Calendar calendar = Calendar.getInstance();
+	    calendar.set(currentYear, currentMonth, 1);
+	    int firstDay = calendar.get(Calendar.DAY_OF_WEEK);
+	    int firstDayAdjusted = (firstDay == Calendar.SUNDAY) ? 6 : firstDay - 2;
+	    int day = 1;
 
-		for (int row = 0; row < 6; row++) {
-			Object[] rowData = new Object[7];
-			for (int col = 0; col < 7; col++) {
-				if ((row == 0 && col < firstDayAdjusted) || day > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
-					rowData[col] = "";
-				} else {
-					int currentDay = day;
-					rowData[col] = currentDay;
+	    boolean[][] highlightedCells = new boolean[6][7];
 
-					LocalDate currentDate = LocalDate.of(currentYear, currentMonth + 1, currentDay);
-					for (Task task : cont.getTasks(client)) {
-						if (task.getDue_date().equals(currentDate)) {
-							table.getColumnModel().getColumn(col).getCellRenderer();
-							table.setDefaultRenderer(Object.class, new ColorCellRenderer(row, col));
-						}
-					}
-					day++;
-				}
-			}
-			model.addRow(rowData);
-		}
+	    for (int row = 0; row < 6; row++) {
+	        Object[] rowData = new Object[7];
+	        for (int col = 0; col < 7; col++) {
+	            if ((row == 0 && col < firstDayAdjusted) || day > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+	                rowData[col] = "";
+	            } else {
+	                int currentDay = day;
+	                rowData[col] = currentDay;
 
-		calendarPanel.add(new JScrollPane(table), BorderLayout.CENTER);
-		calendarPanel.revalidate();
-		calendarPanel.repaint();
-		lblMonth.setText(monthNames[currentMonth]);
-		lblYear.setText(String.valueOf(currentYear));
+	                LocalDate currentDate = LocalDate.of(currentYear, currentMonth + 1, currentDay);
+
+	                for (Task task : cont.getTasks(client)) {
+	                    if (!task.getDue_date().isBefore(LocalDate.now())) {
+	                        if (task.getDue_date().equals(currentDate)) {
+	                            highlightedCells[row][col] = true;
+	                        }
+	                    }
+	                }
+
+	                day++;
+	            }
+	        }
+	        model.addRow(rowData);
+	    }
+
+	    table.setDefaultRenderer(Object.class, new ColorCellRenderer(highlightedCells));
+
+	    calendarPanel.add(new JScrollPane(table), BorderLayout.CENTER);
+	    calendarPanel.revalidate();
+	    calendarPanel.repaint();
+	    lblMonth.setText(monthNames[currentMonth]);
+	    lblYear.setText(String.valueOf(currentYear));
 	}
+
 
 	/**
 	 * Custom cell renderer to highlight cells with tasks.
 	 */
 	class ColorCellRenderer extends DefaultTableCellRenderer {
-		private static final long serialVersionUID = 1L;
-		private final int targetRow;
-		private final int targetColumn;
+	    private static final long serialVersionUID = 1L;
+	    private final boolean[][] highlightedCells;
 
-		public ColorCellRenderer(int targetRow, int targetColumn) {
-			this.targetRow = targetRow;
-			this.targetColumn = targetColumn;
-		}
+	    public ColorCellRenderer(boolean[][] highlightedCells) {
+	        this.highlightedCells = highlightedCells;
+	    }
 
-		@Override
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-			Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+	    @Override
+	    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+	        Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-			if (row == targetRow && column == targetColumn) {
-				comp.setBackground(Color.ORANGE);
-			} else {
-				comp.setBackground(Color.WHITE);
-			}
+	        if (highlightedCells[row][column]) {
+	            comp.setBackground(Color.ORANGE);
+	        } else {
+	            comp.setBackground(Color.WHITE);
+	        }
 
-			return comp;
-		}
+	        return comp;
+	    }
 	}
 
 	/**
@@ -314,11 +321,11 @@ public class WindowMenu extends JFrame implements ActionListener {
 		boolean passed = false;
 
 		for (Task task : cont.getTasks(client)) {
-			if (ChronoUnit.DAYS.between(LocalDate.now(), task.getDue_date()) < 3) {
+			if ((ChronoUnit.DAYS.between(LocalDate.now(), task.getDue_date()) < 3) && task.getTask_state().equals(Task_state_Enum.PENDING)) {
 				exists = true;
 			}
 
-			if (task.getDue_date().isBefore(LocalDate.now())) {
+			if (task.getDue_date().isBefore(LocalDate.now()) && task.getTask_state().equals(Task_state_Enum.PENDING)) {
 				cont.stateTask(task);
 				passed = true;
 			}
