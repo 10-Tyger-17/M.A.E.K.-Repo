@@ -8,41 +8,62 @@ import org.junit.jupiter.api.Test;
 
 import model.Client;
 
+/**
+ * The TestClient class provides unit tests for the Client class.
+ */
 class TestClient {
-	Client client;
+    private Client client;
 
-	@BeforeEach
-	void setUp() throws Exception {
-		client = new Client("Test", "Test", "Test", 23);
-	}
+    /**
+     * Sets up the test environment before each test.
+     *
+     * @throws Exception if an error occurs during setup
+     */
+    @BeforeEach
+    void setUp() throws Exception {
+        client = new Client("Test", "Test", "Test", 23);
+    }
 
-	@AfterEach
-	void tearDown() throws Exception {
-		client = null;
-	}
+    /**
+     * Cleans up the test environment after each test.
+     *
+     * @throws Exception if an error occurs during teardown
+     */
+    @AfterEach
+    void tearDown() throws Exception {
+        client = null;
+    }
 
-	@Test
-	void constructorTest() {
-		assertNotNull(client);
-	}
+    /**
+     * Tests the constructor of the Client class.
+     */
+    @Test
+    void constructorTest() {
+        assertNotNull(client);
+    }
 
-	@Test
-	void gettersTest() {
-		assertEquals("Test", client.getUsername());
-		assertEquals("Test", client.getClient_name());
-		assertEquals("Test", client.getClient_password());
-		assertEquals(23, client.getAge());
-	}
+    /**
+     * Tests the getter methods of the Client class.
+     */
+    @Test
+    void gettersTest() {
+        assertEquals("Test", client.getUsername());
+        assertEquals("Test", client.getClient_name());
+        assertEquals("Test", client.getClient_password());
+        assertEquals(23, client.getAge());
+    }
 
-	@Test
-	void settersTest() {
-		client.setUsername("Test2");
-		client.setClient_name("Test2");
-		client.setClient_password("Test2");
-		client.setAge(24);
-		assertEquals("Test2", client.getUsername());
-		assertEquals("Test2", client.getClient_name());
-		assertEquals("Test2", client.getClient_password());
-		assertEquals(24, client.getAge());
-	}
+    /**
+     * Tests the setter methods of the Client class.
+     */
+    @Test
+    void settersTest() {
+        client.setUsername("Test2");
+        client.setClient_password("Test2");
+        client.setAge(24);
+        assertEquals("Test2", client.getUsername());
+        assertEquals("Test2", client.getClient_name());
+        assertEquals("Test2", client.getClient_password());
+        assertEquals(24, client.getAge());
+    }
 }

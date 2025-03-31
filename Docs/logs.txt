@@ -1,0 +1,388 @@
+commit 6cee391aee69d380ccedc57ad8e71abe99338bc3
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Thu Mar 20 12:37:23 2025 +0100
+
+    Modifying windows
+
+commit e4f8b8b969a6d75c3c959bb877cec682648f5ee7
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Thu Mar 20 12:19:35 2025 +0100
+
+    modify showTaks
+
+commit 76aba2aaa79d610e5cd42f8acfd0ca0ff452b256
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Thu Mar 20 10:55:27 2025 +0100
+
+    Changing task
+
+commit dd88270a8ae47ebd492c35544e01e146753c3fc9
+Merge: f80eb33 886e0f6
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Thu Mar 20 10:54:14 2025 +0100
+
+    Merge branch 'mosi' into main
+
+commit 886e0f636624bd4f25fd43bd79e41a6559b0b529
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Thu Mar 20 10:53:31 2025 +0100
+
+    Changing Database and Adding Modify Window
+
+commit f80eb33d53c71aef01866b50c96484b81f61b15c
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Thu Mar 20 10:51:24 2025 +0100
+
+    Attributes and ButtonGroup
+
+commit e7f14ac66c8da938592dbc1bd4fc55bf0ee9acf2
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Thu Mar 20 10:42:53 2025 +0100
+
+    Completing showTasks
+
+commit 7217dc3a72fd5723eb604e9bcf15fe5cf9a970c9
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Thu Mar 20 10:32:51 2025 +0100
+
+    Add Task creation
+
+commit 6cdb5aa1e1f9f62e56d90f4edecbda964274fc3d
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Thu Mar 20 09:56:58 2025 +0100
+
+    Fixing And adding functionality to menu
+
+commit 41bca068b5a6dd868ccf96e1b288ba59af0f0e07
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Thu Mar 20 09:50:24 2025 +0100
+
+    Converting Menu To JFrame and Login To Dialog
+
+commit 0c35bce1239cb333b195bc765fec2f7754bc603d
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Thu Mar 20 09:41:54 2025 +0100
+
+    Testing modals
+
+commit c2d1693fbb12a4983d7fec5fe511b0bef338c9f5
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Thu Mar 20 09:24:59 2025 +0100
+
+    Fixing Sign Up Window And Calender
+
+commit 65c5b15a180706868a2b7bd5288caa330348272d
+Author: Ekaitz Campo <ekaitzcampo2002@gmail.com>
+Date:   Wed Mar 19 19:46:28 2025 +0100
+
+    Adding calendar
+
+commit dd7d54acf6ca3155c8c24a3d9210dddf32978e47
+Merge: 6ba5017 d894f13
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Wed Mar 19 12:41:57 2025 +0100
+
+    Merge branch 'main' of https://github.com/10-Tyger-17/M.A.E.K.-Repo
+    Trying merge
+
+commit 6ba501701cd35320ef4519209ec37913a91caf8d
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Wed Mar 19 12:40:54 2025 +0100
+
+    Show tasks window
+
+commit d894f1378c5648f6f16da409f1ce90965e519ad6
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Wed Mar 19 12:35:20 2025 +0100
+
+    Creating stateTask
+
+commit df42ad099a29ee0996f88c380cf4cf0ee0cd70af
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 12:29:39 2025 +0100
+
+    Fixing Sign Up Error
+
+commit f015dd27c9a1848a39e237150757a23f1f843574
+Merge: bd06f28 9ec23a0
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 12:19:40 2025 +0100
+
+    Merge branch 'mosi' into main
+
+commit bd06f2815392fa4cfe4d1e8e0bbcfa516ab904b0
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Wed Mar 19 12:19:20 2025 +0100
+
+    Creating modifyTask
+
+commit 9ec23a07bb428b57b9d53065553bfde9a41eda91
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 12:18:48 2025 +0100
+
+    Adding Functionality To Sign Up and Log In
+
+commit e200119ac5ce66126b6ca6fbfd14ddc1240fc91d
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Wed Mar 19 12:08:38 2025 +0100
+
+    Creating removeTask
+
+commit e9567c06d757d2158394442dabf63882a9b5c0df
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Wed Mar 19 11:59:54 2025 +0100
+
+    Changing errors
+
+commit a809e2abff6cac20dbae148ec2c4c13ccccab71c
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Wed Mar 19 11:53:11 2025 +0100
+
+    Creating setTask
+
+commit 9bd709040111cb6864f35be14ba921da28b12426
+Merge: 6dab824 20a44d0
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 10:48:26 2025 +0100
+
+    Merge branch 'mosi' into main
+
+commit 20a44d0b047247404b8f472cd407fbdfdeb017eb
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 10:47:54 2025 +0100
+
+    Adding Window Menu
+
+commit 6dab8240e6905ceff1da0db525d6d7cdbead9d0d
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Wed Mar 19 10:36:46 2025 +0100
+
+    Calendar
+
+commit 44b6d1bbb8ddbb14459cf2cb70e349de8abd5874
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Wed Mar 19 10:35:12 2025 +0100
+
+    Calendar
+
+commit 181148e44713156e9cc6fb1712437768b60af5a4
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Wed Mar 19 10:32:03 2025 +0100
+
+    Implementation of SignUp
+
+commit 2e34c085a1159fd5f975d2a4b8c6659cedc5c7f6
+Merge: 839a410 ef0121a
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Wed Mar 19 10:09:08 2025 +0100
+
+    Merge branch 'Alicia' into main
+
+commit ef0121a3d9fc7fc42c8bfab7d09d4bc446f61047
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Wed Mar 19 10:08:56 2025 +0100
+
+    WindowSignUp
+
+commit 839a410f4e8f298a04ac386efdda0c35fd61d3a5
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Wed Mar 19 10:06:44 2025 +0100
+
+    Fixing login
+
+commit 9d85dde5ee1af6c769cc295b0b5ffb1e817f326c
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 09:42:59 2025 +0100
+
+    Changing Field Borders
+
+commit 8f53134a868e709878925ab2f6929d32e765640f
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Wed Mar 19 09:32:37 2025 +0100
+
+    Changing Login Window
+
+commit b8205a98c55268dcfc0133d30a84b8645ac7444d
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Wed Mar 19 09:24:52 2025 +0100
+
+    MySQL Connector
+
+commit 507853900df86a22f1a83904fa30f7da39a40720
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Tue Mar 18 14:22:15 2025 +0100
+
+    Controller and Window
+
+commit 812b5ce49b75cd4bcb4eff8cdd594a641b5e136e
+Merge: d508c6b 3792612
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Tue Mar 18 10:49:24 2025 +0100
+
+    Merge branch 'mosi'
+    Merging Mosi
+
+commit 37926125d01ee7ccf029c84218241a0af25a93db
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Tue Mar 18 10:48:53 2025 +0100
+
+    Adding Login Window
+
+commit d508c6bed08486079b27dc28e3c4f1dec7c335a3
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Tue Mar 18 10:43:39 2025 +0100
+
+    SignUp method
+
+commit f7562ebc6c1c81307a819ca2c6ba2d39722b81ce
+Merge: d30252c cd1594d
+Author: 1dami <1dami@TartangaLH.eus>
+Date:   Tue Mar 18 10:28:48 2025 +0100
+
+    Merge branch 'Ekaitz'
+    Creating show tasks method
+
+commit cd1594d406941a9c643730307e73b6620467b3d2
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Tue Mar 18 10:27:51 2025 +0100
+
+    Creating show task
+
+commit d30252c01bc36091dda37ab52546d02e3d176ab2
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Tue Mar 18 10:24:31 2025 +0100
+
+    Procedure creation
+
+commit 0b137ad5b108b7463740614de38f7e6238163f19
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Tue Mar 18 10:00:40 2025 +0100
+
+    Modifying model
+
+commit 1ff0c7a557d400aba5efe00fc99f9531cf5827d9
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Tue Mar 18 09:56:18 2025 +0100
+
+    Model creation
+
+commit 40a232efc5a35f057baa3a1832d0046a8ecae196
+Merge: 8d946f4 d3c3f08
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Tue Mar 18 09:51:14 2025 +0100
+
+    Merge branch 'Alicia' into main
+
+commit d3c3f0829891b76ef8cb162db5e74086bc1df3d1
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Tue Mar 18 09:50:19 2025 +0100
+
+    Model creation
+
+commit 8d946f47f25593ce316292ae20cd4179df140b8f
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Tue Mar 18 09:20:23 2025 +0100
+
+    Deleting testing
+
+commit bfc0a8bbd5cd9e7fd09875eb5159af7a0bcdf952
+Author: Ekasestao <ekaitzcampo2002@gmail.com>
+Date:   Tue Mar 18 09:13:46 2025 +0100
+
+    Testing
+
+commit 65b3e549c1181e5865a0ef3550bd24b43249c42d
+Author: Eleterozo <martintemprano769gmail.com>
+Date:   Mon Mar 17 14:18:32 2025 +0100
+
+    Real corrected inserts DB
+
+commit 76c3cfcc0b456e4341af95f1be2a34c20434c5de
+Author: Eleterozo <martintemprano769gmail.com>
+Date:   Mon Mar 17 14:17:08 2025 +0100
+
+    Corrected inserts DB
+
+commit fc32dfbc7d8832b4d2b01f6af961842cb2e16c7c
+Author: Eleterozo <martintemprano769gmail.com>
+Date:   Mon Mar 17 14:07:26 2025 +0100
+
+    Inserts DB
+
+commit 0849614d62ccfb40f98d011d0f7458fe0434535f
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 13:57:22 2025 +0100
+
+    Stop tracking configs directory
+
+commit db6894baff91e459c38803948c55cf62732787b2
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 13:56:11 2025 +0100
+
+    Stop tracking configs directory
+
+commit a58ef6faa5ac5833bfd12c35d9a3a5266c91eab9
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Mon Mar 17 13:49:44 2025 +0100
+
+    Adding config to ignore
+
+commit 057d12e71ed06baa7357b3433c4aed28d9553d5f
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 13:44:26 2025 +0100
+
+    Adding to Git Ignore
+
+commit 8a2c47b3bc411cdee7fde57b81a0b8b7051f7739
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 13:41:12 2025 +0100
+
+    Testing and updating
+
+commit 78c0365c07da6b7f0d186be510e60bea48ddb49d
+Author: Eleterozo <martintemprano769gmail.com>
+Date:   Mon Mar 17 13:18:03 2025 +0100
+
+    Probando
+
+commit 8fa3d9b0945e16feb731fb6b5d51f8d664290a5d
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 13:14:05 2025 +0100
+
+    Adding java
+
+commit 1f4c4de125d33b453f403ec5a9624e7417f1cb2a
+Author: alicia-2004 <aliciaclasegradosuperior@gmail.com>
+Date:   Mon Mar 17 13:08:56 2025 +0100
+
+    Adding SQL table creation and DB
+
+commit ff796a78707278306f12b6e2167754b5170d03d4
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 12:42:17 2025 +0100
+
+    Deleting Folders
+
+commit 8e90f5b827a55bac0123ead23a60d9203f779821
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 09:54:08 2025 +0100
+
+    Adding Content
+
+commit 0a9651e456acaa928c93d3d5681fa79c6777d9fc
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 09:51:12 2025 +0100
+
+    Initialization
+
+commit ba5ec365712004c87aad42f6d6c0a49a2c7e70a6
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 09:42:37 2025 +0100
+
+    17-3-25
+
+commit 97725866d3a4c4ef6599c8aa8ad605e489ae7dc5
+Author: 10-Tyger-17 <mosi.hickman2006@gmail.com>
+Date:   Mon Mar 17 09:37:13 2025 +0100
+
+    Initial commit
